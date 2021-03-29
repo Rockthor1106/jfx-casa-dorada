@@ -4,9 +4,9 @@ public abstract class Person  {
 	
 	private String name;
 	private String last_name;
-	private int id_number;
+	private String id_number;
 	
-	public Person(String name, String last_name, int id_number) {
+	public Person(String name, String last_name, String id_number) {
 		this.name = name;
 		this.last_name = last_name;
 		this.id_number = id_number;
@@ -20,7 +20,7 @@ public abstract class Person  {
 		return last_name;
 	}
 
-	public int getId_number() {
+	public String getId_number() {
 		return id_number;
 	}
 
@@ -32,7 +32,7 @@ public abstract class Person  {
 		this.last_name = last_name;
 	}
 
-	public void setId_number(int id_number) {
+	public void setId_number(String id_number) {
 		this.id_number = id_number;
 	}
 	

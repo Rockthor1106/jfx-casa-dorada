@@ -43,10 +43,11 @@ public class CasaDoradaGUI {
     @FXML
     private BorderPane mainPane;
 
-    @FXML
-    void logIn(ActionEvent event) {
+    private CasaDorada casaDorada;
 
-    }
+	public CasaDoradaGUI(CasaDorada casaDorada) {
+		this.casaDorada = casaDorada;
+	}
 
     @FXML
     void logInScreen(ActionEvent event) throws IOException {
@@ -79,33 +80,77 @@ public class CasaDoradaGUI {
 	    alert.showAndWait();
     }
     
-    private CasaDorada casaDorada;
-
-	public CasaDoradaGUI(CasaDorada casaDorada) {
-		this.casaDorada = casaDorada;
-	}
-
 	@FXML
 	void LogIn(ActionEvent event) {
-		System.out.println(new CasaDorada().getEmployees().get(0).getUsername());
-		boolean username_exists = new CasaDorada().getEmployees().get(0).getUsername().equals(strUsername.getText());
-		boolean password_exists = new CasaDorada().getEmployees().get(0).getPassword().equals(strPassword.getText());
-		if (username_exists == true && password_exists == true) {
-			msg.setText("BIENIDOOOOOOO");
-		} else {
-			msg.setText("ERROOOOOR");
+		boolean username_exists = false;
+		boolean password_exists = false;
+		for(int i = 0; i < casaDorada.getEmployees().size(); i++) {
+			if (casaDorada.getEmployees().get(i).getUsername().equals(strUsername.getText()) == true) {
+				if (password_exists = casaDorada.getEmployees().get(i).getPassword().equals(strPassword.getText())) {
+					username_exists = true;
+					password_exists = true;
+				}
+			}
+
 		}
+		if (username_exists == true && password_exists == true) {
+			msg.setText("Bienidooooo");
+		}
+		else {
+			msg.setText("Errooor");
+		}
+		
 	}
 
 	@FXML
 	void createAccount(ActionEvent event) throws IOException {
 		String name = registerName.getText();
 		String last_name = registerLast_name.getText();
-		int id = Integer.parseInt(registerId.getText());
+		String id_number = registerId.getText();
 		String username = registerUsername.getText();
 		String password = registerPassword.getText();
-		new CasaDorada().addEmployee(name,last_name,id,username,password);
-		System.out.println(casaDorada.getEmployees().get(0).getName());
+
+		if(registerName.getText().equals("")&&registerLast_name.getText().equals("")&&registerId.getText().equals("")&&registerUsername.getText().equals("")&&registerPassword.getText().equals("")) {
+			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada");
+		}
+		else if (registerName.getText().equals("")) {
+			emptyField("Por favor ingrese un nombre");
+		}
+		else if (registerLast_name.getText().equals("")) {
+			emptyField("Por favor ingrese un apellido");
+		}
+		else if (registerId.getText().equals("")) {
+			emptyField("Por favor ingrese un numero de identificación");
+		}
+		else if (registerUsername.getText().equals("")) {
+			emptyField("Por favor ingrese un nombre de usuario");
+		}
+		else if (registerPassword.getText().equals("")) {
+			emptyField("Por favor ingrese una contraseña");
+		}
+		else {
+			casaDorada.addEmployee(name, last_name, id_number, username, password);
+			accountCreatedSuccessfully();
+		}
 	}
 	
+    @FXML
+    public void accountCreatedSuccessfully() {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Creación de cuenta");
+	    alert.setHeaderText(":D");
+	    alert.setContentText("Cuenta creada con éxito");
+	
+	    alert.showAndWait();
+    }
+    
+    @FXML
+    public void emptyField(String msg) {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Creación de cuenta");
+	    alert.setHeaderText(":(");
+	    alert.setContentText(msg);
+	
+	    alert.showAndWait();
+    }
 }

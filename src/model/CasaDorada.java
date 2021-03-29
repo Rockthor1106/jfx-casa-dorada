@@ -13,7 +13,7 @@ public class CasaDorada {
 		employees = new ArrayList<>();
 	}
 	
-	public void addEmployee(String name, String last_name, int id_number, String username, String password) {
+	public void addEmployee(String name, String last_name, String id_number, String username, String password) {
 		employees.add(new Employee(name, last_name, id_number, username, password));
 	}
 	
