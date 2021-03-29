@@ -10,10 +10,12 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Opciones">
+          <Menu fx:id="menu" mnemonicParsing="false" text="Opciones">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#registerScreen" text="Registrar empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Agregar producto" visible="false" />
+                  <MenuItem fx:id="singOut" mnemonicParsing="false" text="Cerrar sesión" visible="false" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">

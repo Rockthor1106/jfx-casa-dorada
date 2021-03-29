@@ -9,9 +9,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import model.CasaDorada;
 
 public class CasaDoradaGUI {
@@ -42,7 +46,10 @@ public class CasaDoradaGUI {
     
     @FXML
     private BorderPane mainPane;
-
+    
+    @FXML
+    private Menu menu;
+    
     private CasaDorada casaDorada;
 
 	public CasaDoradaGUI(CasaDorada casaDorada) {
@@ -81,7 +88,8 @@ public class CasaDoradaGUI {
     }
     
 	@FXML
-	void LogIn(ActionEvent event) {
+	void LogIn(ActionEvent event) throws IOException {
+		boolean logged = false;
 		boolean username_exists = false;
 		boolean password_exists = false;
 		for(int i = 0; i < casaDorada.getEmployees().size(); i++) {
@@ -95,21 +103,25 @@ public class CasaDoradaGUI {
 		}
 		if (username_exists == true && password_exists == true) {
 			msg.setText("Bienidooooo");
+			logged = true;
+			loggedOptions(logged);
 		}
 		else {
 			msg.setText("Errooor");
 		}
-		
 	}
 
 	@FXML
 	void createAccount(ActionEvent event) throws IOException {
+		
 		String name = registerName.getText();
 		String last_name = registerLast_name.getText();
 		String id_number = registerId.getText();
 		String username = registerUsername.getText();
 		String password = registerPassword.getText();
 
+		//debo agregar la validación para ver si el usuario ya existe en le sistema
+		
 		if(registerName.getText().equals("")&&registerLast_name.getText().equals("")&&registerId.getText().equals("")&&registerUsername.getText().equals("")&&registerPassword.getText().equals("")) {
 			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada");
 		}
@@ -153,4 +165,17 @@ public class CasaDoradaGUI {
 	
 	    alert.showAndWait();
     }
+    
+    public void loggedOptions(boolean logged) throws IOException {
+    	if (logged == true) {
+    		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
+    		menu.getItems().get(3).setVisible(true); //makes the option "cerrar sesión" visible
+		}
+    }
+    
+    @FXML
+    void addProduct(ActionEvent event) {
+
+    }
+
 }
