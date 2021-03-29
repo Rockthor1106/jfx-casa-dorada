@@ -1,53 +1,38 @@
 package ui;
 
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import model.CasaDorada;
 
-import model.Employee;
-import model.UserAccounts;
-
-public class Main {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		String name, last_name, username, password;
-		int id_number;
+public class Main extends Application{
+	
+		private CasaDoradaGUI casaDoradaGUI;
+		private CasaDorada casaDorada;
 		
-		
+		public Main() {
+			casaDorada = new CasaDorada();
+			casaDoradaGUI = new CasaDoradaGUI(casaDorada);
+		}
 
-			System.out.println("SING UP");
-			System.out.println("name: ");
-			name = sc.nextLine();
-			System.out.println("last name: ");
-			last_name = sc.nextLine();
-			System.out.println("ID number: ");
-			id_number = Integer.parseInt(sc.nextLine());
-			System.out.println("username: ");
-			username = sc.nextLine();
-			System.out.println("password: ");
-			password = sc.nextLine();
-			new UserAccounts().addEmployee(name, last_name, id_number, username, password);
+		public static void main (String[] args) {
+			launch(args);
+		}
+
+		@Override
+		public void start(Stage primaryStage) throws Exception {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("entry.fxml"));
+
+			fxmlLoader.setController(casaDoradaGUI);
 			
-		
-			System.out.println("name: ");
-			name = sc.nextLine();
-			System.out.println("last name: ");
-			last_name = sc.nextLine();
-			System.out.println("ID number: ");
-			id_number = Integer.parseInt(sc.nextLine());
-			System.out.println("username: ");
-			username = sc.nextLine();
-			System.out.println("password: ");
-			password = sc.nextLine();
-			new UserAccounts().addEmployee(name, last_name, id_number, username, password);
-
-
-		// login
-		System.out.println("-----------LOG IN----------");
-		System.out.println("Type your username: ");
-		username = sc.nextLine();
-		System.out.println("Type your password");
-		password = sc.nextLine();
-		new UserAccounts().userExists(username, password);
-	}
+			Parent root = fxmlLoader.load();
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Casa Dorada");
+			primaryStage.show();
+		}
 
 }

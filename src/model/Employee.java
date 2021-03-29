@@ -1,19 +1,16 @@
 package model;
 
-
-
 public class Employee extends Person {
 
-	String username;
-	String password;
+	private String username;
+	private String password;
 
-	public Employee(String name,String last_name,int id_number, String username, String password) {
+	public Employee(String name, String last_name, int id_number, String username, String password) {
 		super(name, last_name, id_number);
 		this.username = username;
 		this.password = password;
-
 	}
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -21,15 +18,5 @@ public class Employee extends Person {
 	public String getPassword() {
 		return password;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
 
 }
