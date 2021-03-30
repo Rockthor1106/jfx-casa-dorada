@@ -15,7 +15,7 @@
               <MenuItem mnemonicParsing="false" onAction="#registerScreen" text="Registrar empleado" />
                   <MenuItem mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" />
                   <MenuItem mnemonicParsing="false" onAction="#addProduct" text="Agregar producto" visible="false" />
-                  <MenuItem fx:id="singOut" mnemonicParsing="false" text="Cerrar sesión" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">

@@ -9,12 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import model.CasaDorada;
 
@@ -25,9 +21,6 @@ public class CasaDoradaGUI {
 
 	@FXML
 	private PasswordField strPassword;
-
-	@FXML
-	private Label msg;
 
 	@FXML
     private TextField registerName;
@@ -55,6 +48,45 @@ public class CasaDoradaGUI {
 	public CasaDoradaGUI(CasaDorada casaDorada) {
 		this.casaDorada = casaDorada;
 	}
+	
+	// Alerts
+	@FXML
+    public void logInAlert(String msg, AlertType alertType) {
+	    Alert alert = new Alert(alertType);
+	    alert.setTitle("Iniciar sesión");
+	    alert.setHeaderText(":D");
+	    alert.setContentText(msg);
+	    alert.show();
+    }
+    @FXML
+    public void accountCreatedSuccessfully() {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Crear cuenta");
+	    alert.setHeaderText(":D");
+	    alert.setContentText("Cuenta creada con éxito");
+	
+	    alert.showAndWait();
+    }
+    @FXML
+    public void emptyField(String msg, AlertType alertType) {
+	    Alert alert = new Alert(alertType);
+	    alert.setTitle("Creación de cuenta");
+	    alert.setHeaderText(":(");
+	    alert.setContentText(msg);
+	
+	    alert.showAndWait();
+    }
+    
+    @FXML
+    void showAbout(ActionEvent event) {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Casa Dorada");
+	    alert.setHeaderText("Creditos:");
+	    alert.setContentText("Jhan Carlos Carvajal Bastidas");
+	    alert.showAndWait();
+    }
+    
+	// Methods
 
     @FXML
     void logInScreen(ActionEvent event) throws IOException {
@@ -78,14 +110,7 @@ public class CasaDoradaGUI {
     	mainPane.setTop(registerScreen);
     }
 
-    @FXML
-    void showAbout(ActionEvent event) {
-	    Alert alert = new Alert(AlertType.INFORMATION);
-	    alert.setTitle("Casa Dorada");
-	    alert.setHeaderText("Creditos:");
-	    alert.setContentText("Jhan Carlos Carvajal Bastidas");
-	    alert.showAndWait();
-    }
+
     
 	@FXML
 	void LogIn(ActionEvent event) throws IOException {
@@ -102,12 +127,12 @@ public class CasaDoradaGUI {
 
 		}
 		if (username_exists == true && password_exists == true) {
-			msg.setText("Bienidooooo");
 			logged = true;
-			loggedOptions(logged);
+			showLoggedOptions(logged);
+			logInAlert("Inicio de sesión exitoso", AlertType.INFORMATION);
 		}
 		else {
-			msg.setText("Errooor");
+			logInAlert("Nombre de usuario o contraseña incorrectos", AlertType.ERROR);
 		}
 	}
 
@@ -119,26 +144,24 @@ public class CasaDoradaGUI {
 		String id_number = registerId.getText();
 		String username = registerUsername.getText();
 		String password = registerPassword.getText();
-
-		//debo agregar la validación para ver si el usuario ya existe en le sistema
 		
 		if(registerName.getText().equals("")&&registerLast_name.getText().equals("")&&registerId.getText().equals("")&&registerUsername.getText().equals("")&&registerPassword.getText().equals("")) {
-			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada");
+			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
 		}
 		else if (registerName.getText().equals("")) {
-			emptyField("Por favor ingrese un nombre");
+			emptyField("Por favor ingrese un nombre", AlertType.WARNING);
 		}
 		else if (registerLast_name.getText().equals("")) {
-			emptyField("Por favor ingrese un apellido");
+			emptyField("Por favor ingrese un apellido", AlertType.WARNING);
 		}
 		else if (registerId.getText().equals("")) {
-			emptyField("Por favor ingrese un numero de identificación");
+			emptyField("Por favor ingrese un numero de identificación", AlertType.WARNING);
 		}
 		else if (registerUsername.getText().equals("")) {
-			emptyField("Por favor ingrese un nombre de usuario");
+			emptyField("Por favor ingrese un nombre de usuario", AlertType.WARNING);
 		}
 		else if (registerPassword.getText().equals("")) {
-			emptyField("Por favor ingrese una contraseña");
+			emptyField("Por favor ingrese una contraseña", AlertType.WARNING);
 		}
 		else {
 			casaDorada.addEmployee(name, last_name, id_number, username, password);
@@ -146,27 +169,7 @@ public class CasaDoradaGUI {
 		}
 	}
 	
-    @FXML
-    public void accountCreatedSuccessfully() {
-	    Alert alert = new Alert(AlertType.INFORMATION);
-	    alert.setTitle("Creación de cuenta");
-	    alert.setHeaderText(":D");
-	    alert.setContentText("Cuenta creada con éxito");
-	
-	    alert.showAndWait();
-    }
-    
-    @FXML
-    public void emptyField(String msg) {
-	    Alert alert = new Alert(AlertType.INFORMATION);
-	    alert.setTitle("Creación de cuenta");
-	    alert.setHeaderText(":(");
-	    alert.setContentText(msg);
-	
-	    alert.showAndWait();
-    }
-    
-    public void loggedOptions(boolean logged) throws IOException {
+    public void showLoggedOptions(boolean logged) throws IOException {
     	if (logged == true) {
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "cerrar sesión" visible
@@ -174,8 +177,14 @@ public class CasaDoradaGUI {
     }
     
     @FXML
+    void singOut(ActionEvent event) {
+    	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
+		menu.getItems().get(3).setVisible(false); //makes the option "cerrar sesión" invisible
+    }
+    
+    @FXML
     void addProduct(ActionEvent event) {
-
+    	
     }
 
 }

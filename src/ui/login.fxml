@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,21 +14,28 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <BorderPane prefHeight="93.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <center>
+      <BorderPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <bottom>
             <Label text="INICIAR SESION" BorderPane.alignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
+         </bottom>
+         <center>
+            <ImageView fitHeight="79.0" fitWidth="600.0" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../../../../Pictures/banner.jpg" />
+               </image>
+            </ImageView>
          </center>
       </BorderPane>
    </top>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="295.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="305.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,7 +52,7 @@
                   </Label>
                </center>
             </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <BorderPane prefHeight="90.0" prefWidth="303.0" GridPane.rowIndex="1">
                <center>
                   <Label text="Contraseña: " BorderPane.alignment="CENTER">
                      <font>
@@ -62,12 +71,15 @@
                   <PasswordField fx:id="strPassword" prefHeight="25.0" prefWidth="199.0" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
-            <Label fx:id="msg" text="textooooooooooooo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#LogIn" text="Iniciar Sesión" GridPane.rowIndex="2">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <center>
+                  <Button mnemonicParsing="false" onAction="#LogIn" text="Iniciar Sesión" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </center>
+            </BorderPane>
          </children>
       </GridPane>
    </center>

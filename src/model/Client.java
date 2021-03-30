@@ -24,17 +24,4 @@ public class Client extends Person {
 	public String getComment() {
 		return comment;
 	}
-
-	public void setPhone_number(int phone_number) {
-		this.phone_number = phone_number;
-	}
-
-	public void setAddres(String addres) {
-		this.addres = addres;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
 }
