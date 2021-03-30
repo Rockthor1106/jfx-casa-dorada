@@ -6,6 +6,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,96 +19,115 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane prefHeight="235.0" prefWidth="601.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="25.0" minHeight="5.0" prefHeight="12.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <right>
-                        <Label text="Nombre:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </right>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <right>
-                        <Label text="Ingredientes" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </right>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <right>
-                        <Label text="Tamaño:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </right>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                     <right>
-                        <Label text="Tipo:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </right>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-                     <right>
-                        <Label text="Precio:" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </right>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <left>
-                        <TextField fx:id="nameProduct" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                     </left>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <left>
-                        <TextField fx:id="ingredients" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                     </left>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <left>
-                        <TextField fx:id="price" prefHeight="25.0" prefWidth="99.0" BorderPane.alignment="CENTER" />
-                     </left>
-                  </BorderPane>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <GridPane prefHeight="173.0" prefWidth="295.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="109.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="291.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="25.0" minHeight="5.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <BorderPane prefHeight="44.0" prefWidth="207.0">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
-                              <RadioButton mnemonicParsing="false" text="Mediano" BorderPane.alignment="CENTER">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="size" />
-                                 </toggleGroup>
-                              </RadioButton>
+                              <Label text="Nombre:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
                            </center>
-                           <right>
-                              <RadioButton mnemonicParsing="false" text="Familiar" toggleGroup="$size" BorderPane.alignment="CENTER" />
-                           </right>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <center>
+                              <Label text="Ingredientes" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <center>
+                              <Label text="Tamaño:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <center>
+                              <Label text="Tipo:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                           <center>
+                              <Label text="Precio:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <left>
-                              <RadioButton mnemonicParsing="false" text="Personal" toggleGroup="$size" BorderPane.alignment="CENTER" />
+                              <TextField fx:id="registerNameProduct" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </left>
                         </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <left>
+                              <TextField fx:id="registerIngredients" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </left>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <left>
+                              <TextField fx:id="registerPrice" prefHeight="25.0" prefWidth="99.0" BorderPane.alignment="CENTER" />
+                           </left>
+                        </BorderPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <BorderPane prefHeight="44.0" prefWidth="207.0">
+                                 <center>
+                                    <RadioButton fx:id="mediano" mnemonicParsing="false" text="Mediano" BorderPane.alignment="CENTER">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="size" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                 </center>
+                                 <right>
+                                    <RadioButton mnemonicParsing="false" text="Familiar" toggleGroup="$size" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <left>
+                                    <RadioButton fx:id="personal" mnemonicParsing="false" text="Personal" toggleGroup="$size" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="registerType" prefWidth="150.0" promptText="Escoja una opción" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
-                  </HBox>
-                  <ComboBox fx:id="type" prefWidth="150.0" promptText="Escoja una opción" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               </children>
-            </GridPane>
+                  </GridPane>
+               </center>
+               <left>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <Button mnemonicParsing="false" onAction="#searchImage" text="Seleccionar imagen" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <right>
+                        <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+               </left>
+            </BorderPane>
             <BorderPane prefHeight="107.0" prefWidth="600.0">
                <center>
                   <Button mnemonicParsing="false" onAction="#addProduct" text="Añadir" BorderPane.alignment="CENTER">

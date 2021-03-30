@@ -3,10 +3,10 @@ package model;
 public class Product {
 	private String product_name;
 	private String ingredient;
-	private int size;
+	private String size;
 	private double price;
 
-	public Product(String product_name, String ingredient, int size, double price) {
+	public Product(String product_name, String ingredient, String size, double price) {
 		this.product_name = product_name;
 		this.ingredient = ingredient;
 		this.size = size;
@@ -21,7 +21,7 @@ public class Product {
 		return ingredient;
 	}
 
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 

@@ -6,8 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
@@ -46,20 +48,31 @@ public class CasaDoradaGUI {
     private Menu menu;
     
     @FXML
-    private TextField nameProduct;
+    private TextField registerNameProduct;
 
     @FXML
-    private TextField ingredients;
+    private TextField registerIngredients;
 
     @FXML
-    private TextField price;
+    private TextField registerPrice;
 
     @FXML
     private ToggleGroup size;
 
     @FXML
-    private ComboBox<?> type;
+    private ComboBox<?> registerType;
 
+    @FXML
+    private RadioButton mediano;
+
+    @FXML
+    private RadioButton familiar;
+
+    @FXML
+    private RadioButton personal;
+    
+    @FXML
+    private ImageView image;
     
     private CasaDorada casaDorada;
 
@@ -205,16 +218,36 @@ public class CasaDoradaGUI {
     @FXML
     void addProductScreen(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-product.fxml"));
-		
 		fxmlLoader.setController(this);    	
 		Parent addProductScreen = fxmlLoader.load();
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(addProductScreen);
+    	
     }
     @FXML
     void addProduct(ActionEvent event) {
+    	String name_product = registerNameProduct.getText();
+    	String ingredients = registerIngredients.getText();
+    	String size = "";
+    	if (personal.isSelected() == true) {
+			size = "Personal";
+		}
+    	else if (mediano.isSelected() == true) {
+    		size = "Mediano";
+		}
+    	else if (familiar.isSelected() == true) {
+    		size = "Familiar";
+			
+		}
     	
+    	double price = Double.parseDouble(registerPrice.getText());
+    	casaDorada.addProduct(name_product, ingredients, size, price);
+    }
+    
+    @FXML
+    void searchImage(ActionEvent event) {
+   
     }
 
 }
