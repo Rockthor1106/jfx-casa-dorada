@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -42,6 +44,22 @@ public class CasaDoradaGUI {
     
     @FXML
     private Menu menu;
+    
+    @FXML
+    private TextField nameProduct;
+
+    @FXML
+    private TextField ingredients;
+
+    @FXML
+    private TextField price;
+
+    @FXML
+    private ToggleGroup size;
+
+    @FXML
+    private ComboBox<?> type;
+
     
     private CasaDorada casaDorada;
 
@@ -171,6 +189,7 @@ public class CasaDoradaGUI {
 	
     public void showLoggedOptions(boolean logged) throws IOException {
     	if (logged == true) {
+    		menu.getItems().get(1).setVisible(false); //makes the option "iniciar sesion" invisible
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "cerrar sesión" visible
 		}
@@ -178,10 +197,21 @@ public class CasaDoradaGUI {
     
     @FXML
     void singOut(ActionEvent event) {
+    	menu.getItems().get(1).setVisible(true); //makes the option "iniciar sesion" visible
     	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
 		menu.getItems().get(3).setVisible(false); //makes the option "cerrar sesión" invisible
     }
     
+    @FXML
+    void addProductScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-product.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addProductScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(addProductScreen);
+    }
     @FXML
     void addProduct(ActionEvent event) {
     	
