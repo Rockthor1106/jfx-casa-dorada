@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import model.CasaDorada;
+import model.Client;
 
 public class CasaDoradaGUI {
 
@@ -74,6 +76,35 @@ public class CasaDoradaGUI {
     @FXML
     private ImageView image;
     
+    @FXML
+    private TextField search_name;
+
+    @FXML
+    private TableColumn<Client, String> tcName;
+
+    @FXML
+    private TableColumn<Client, String> tcLastName;
+
+    @FXML
+    private TableColumn<Client, String> tcID;
+    
+    @FXML
+    private TableColumn<Client, String> tcAddres;
+
+    @FXML
+    private TableColumn<Client, String> tcPhone;
+    
+
+    @FXML
+    private TextField regNameClient;
+
+    @FXML
+    private TextField regLastNameClient;
+
+    @FXML
+    private TextField regIdClient;
+
+    
     private CasaDorada casaDorada;
 
 	public CasaDoradaGUI(CasaDorada casaDorada) {
@@ -93,7 +124,7 @@ public class CasaDoradaGUI {
     public void accountCreatedSuccessfully() {
 	    Alert alert = new Alert(AlertType.INFORMATION);
 	    alert.setTitle("Crear cuenta");
-	    alert.setHeaderText(":D");
+	    alert.setHeaderText("");
 	    alert.setContentText("Cuenta creada con éxito");
 	
 	    alert.showAndWait();
@@ -102,7 +133,7 @@ public class CasaDoradaGUI {
     public void emptyField(String msg, AlertType alertType) {
 	    Alert alert = new Alert(alertType);
 	    alert.setTitle("Creación de cuenta");
-	    alert.setHeaderText(":(");
+	    alert.setHeaderText("Falta información");
 	    alert.setContentText(msg);
 	
 	    alert.showAndWait();
@@ -204,7 +235,9 @@ public class CasaDoradaGUI {
     	if (logged == true) {
     		menu.getItems().get(1).setVisible(false); //makes the option "iniciar sesion" invisible
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
-    		menu.getItems().get(3).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
+    		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -212,7 +245,9 @@ public class CasaDoradaGUI {
     void singOut(ActionEvent event) {
     	menu.getItems().get(1).setVisible(true); //makes the option "iniciar sesion" visible
     	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
-		menu.getItems().get(3).setVisible(false); //makes the option "cerrar sesión" invisible
+   		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
+		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
+		menu.getItems().get(5).setVisible(false); //makes the option "cerrar sesión" invisible
     }
     
     @FXML
@@ -230,13 +265,13 @@ public class CasaDoradaGUI {
     	String name_product = registerNameProduct.getText();
     	String ingredients = registerIngredients.getText();
     	String size = "";
-    	if (personal.isSelected() == true) {
+    	if (personal.isSelected()) {
 			size = "Personal";
 		}
-    	else if (mediano.isSelected() == true) {
+    	else if (mediano.isSelected()) {
     		size = "Mediano";
 		}
-    	else if (familiar.isSelected() == true) {
+    	else if (familiar.isSelected()) {
     		size = "Familiar";
 			
 		}
@@ -247,7 +282,35 @@ public class CasaDoradaGUI {
     
     @FXML
     void searchImage(ActionEvent event) {
+    	
+    }
    
+
+    @FXML
+    void searchClient(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void addClientScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register-client.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent addClientScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(addClientScreen);
+    	
+    }
+    
+    @FXML
+    void searchClientScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("search-client.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent searchClientScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(searchClientScreen);
+    	
     }
 
 }
