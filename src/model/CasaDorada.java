@@ -9,6 +9,7 @@ public class CasaDorada {
 
 	private List<Employee> employees;
 	private List<Product> products;
+	private List<Client> clients;
 	
 	public CasaDorada() {
 		employees = new ArrayList<>();
@@ -33,4 +34,13 @@ public class CasaDorada {
 	public List<Product> getProducts(){
 		return products; 
 	}
+	
+	public List<Client> getClients(){
+		return clients; 
+	}
+	
+	public void addClient(String name, String last_name, String id_number, String phone_number, String addres) {
+		clients.add(new Client(name, last_name, id_number,phone_number , addres));
+	}
+    
 }

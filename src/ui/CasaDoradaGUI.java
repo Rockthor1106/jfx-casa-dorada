@@ -1,7 +1,10 @@
 package ui;
 
-import java.io.IOException;
 
+import java.io.IOException;
+import java.util.Calendar;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
@@ -77,7 +81,7 @@ public class CasaDoradaGUI {
     private ImageView image;
     
     @FXML
-    private TextField search_name;
+    private TextField name_searched;
 
     @FXML
     private TableColumn<Client, String> tcName;
@@ -94,7 +98,6 @@ public class CasaDoradaGUI {
     @FXML
     private TableColumn<Client, String> tcPhone;
     
-
     @FXML
     private TextField regNameClient;
 
@@ -103,13 +106,80 @@ public class CasaDoradaGUI {
 
     @FXML
     private TextField regIdClient;
+    
+    @FXML
+    private TextField regPhoneClient;
+    
+    @FXML
+    private TextField regAddres;
+    
+    @FXML
+    private Menu time;
 
+
+
+    Calendar calendar;
     
     private CasaDorada casaDorada;
 
 	public CasaDoradaGUI(CasaDorada casaDorada) {
 		this.casaDorada = casaDorada;
 	}
+	
+    @FXML
+    public void initialize() {
+    	updateClock();
+    	runClock();
+    }
+	
+	
+	//Bonus - clock
+    public void updateClock() {
+    	calendar = Calendar.getInstance(); //this line brings the system time
+    	int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+    	String amPM = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+    	if (amPM.equals("PM")) {
+			hourOfDay = hourOfDay - 12;
+		}
+    	
+        if (hourOfDay < 10 && calendar.get(Calendar.SECOND) < 10) {
+            time.setText(String.valueOf(hourOfDay + ":0" + calendar.get(Calendar.MINUTE) + ":0" + calendar.get(Calendar.SECOND)) + " " + amPM);
+        } 
+        if (calendar.get(Calendar.MINUTE) < 10) {
+            time.setText(String.valueOf(hourOfDay + ":0" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND)) + " " + amPM);
+        } 
+        if (calendar.get(Calendar.SECOND) < 10) {
+            time.setText(String.valueOf(hourOfDay + ":" + calendar.get(Calendar.MINUTE) + ":0" + calendar.get(Calendar.SECOND)) + " " + amPM);
+        } 
+        else {
+            time.setText(String.valueOf(hourOfDay + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND)) + " " + amPM);
+        }
+
+    }
+    public void runClock() {
+    	Timeline mainTimeline = new Timeline();
+    	Timeline secundaryTimeline = new Timeline();
+    	secundaryTimeline.setCycleCount(Timeline.INDEFINITE);//cycle infinite in this secondary time line
+    	
+    	KeyFrame mainKeyFrame = new KeyFrame(new Duration(1000 - calendar.get(Calendar.MILLISECOND) % 1000), 
+    			(event) -> { //Lan nomenclature
+    				updateClock();
+    				secundaryTimeline.play();	
+    			}
+    	);
+    	
+    	KeyFrame secundaryKeyFrame = new KeyFrame(Duration.seconds(1), 
+    			(event) -> { 
+    				updateClock();
+    			}
+    	);
+    	
+    	mainTimeline.getKeyFrames().add(mainKeyFrame);
+    	secundaryTimeline.getKeyFrames().add(secundaryKeyFrame);
+    	
+    	mainTimeline.play();
+    	
+    }
 	
 	// Alerts
 	@FXML
@@ -129,6 +199,17 @@ public class CasaDoradaGUI {
 	
 	    alert.showAndWait();
     }
+    
+    @FXML
+    public void clientRegisteredSuccessfully() {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Registrar cliente");
+	    alert.setHeaderText("");
+	    alert.setContentText("Cliente registrado exitosamente");
+	
+	    alert.showAndWait();
+    }
+    
     @FXML
     public void emptyField(String msg, AlertType alertType) {
 	    Alert alert = new Alert(alertType);
@@ -163,6 +244,7 @@ public class CasaDoradaGUI {
 
     @FXML
     void registerScreen(ActionEvent event) throws IOException {
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
 		
 		fxmlLoader.setController(this);    	
@@ -289,7 +371,7 @@ public class CasaDoradaGUI {
     @FXML
     void searchClient(ActionEvent event) {
 
-    }
+	}
     
     @FXML
     void addClientScreen(ActionEvent event) throws IOException {
@@ -312,5 +394,38 @@ public class CasaDoradaGUI {
     	mainPane.setTop(searchClientScreen);
     	
     }
+    
+    @FXML
+	void registerClient(ActionEvent event) throws IOException {
+ 		
+		String registerNameClient = regNameClient.getText();
+		String registerLastNameClient = regLastNameClient.getText();
+		String registerIdClient = regIdClient.getText();
+		String registerPhoneClient = regPhoneClient.getText();
+		String registerAddres = regAddres.getText();
+		
+		if(regNameClient.getText().equals("")&&regLastNameClient.getText().equals("")&&regIdClient.getText().equals("")) {
+			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
+		}
+		else if (regNameClient.getText().equals("")) {
+			emptyField("Por favor ingrese un nombre", AlertType.WARNING);
+		}
+		else if (regLastNameClient.getText().equals("")) {
+			emptyField("Por favor ingrese un apellido", AlertType.WARNING);
+		}
+		else if (regIdClient.getText().equals("")) {
+			emptyField("Por favor ingrese un numero de identificación", AlertType.WARNING);
+		}
+		else {
+			casaDorada.addClient(registerNameClient, registerLastNameClient, registerIdClient, registerPhoneClient,registerAddres);
+			clientRegisteredSuccessfully();
+		}
+	}
+    
+    @FXML
+    void importData(ActionEvent event) {
 
+    }
 }
+	
+

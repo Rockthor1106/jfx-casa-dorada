@@ -92,7 +92,7 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <center>
-                        <Button mnemonicParsing="false" onAction="#createAccount" text="Create Account" BorderPane.alignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#createAccount" text="Crear cuenta" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -101,7 +101,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <center>
-                        <Button mnemonicParsing="false" onAction="#logInScreen" text="Sing In" BorderPane.alignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>

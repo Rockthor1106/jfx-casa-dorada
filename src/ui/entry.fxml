@@ -4,29 +4,40 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar prefHeight="43.0" prefWidth="602.0">
-        <menus>
-          <Menu fx:id="menu" mnemonicParsing="false" text="Opciones">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#registerScreen" text="Registrar empleado" />
-                  <MenuItem mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" />
-                  <MenuItem mnemonicParsing="false" onAction="#addProductScreen" text="Agregar producto" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#addClientScreen" text="Agregar cliente" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#searchClientScreen" text="Buscar cliente" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ayuda">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="Acerca de" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <HBox prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <MenuBar prefHeight="25.0" prefWidth="531.0">
+              <menus>
+                <Menu fx:id="menu" mnemonicParsing="false" text="Opciones">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#registerScreen" text="Registrar empleado" />
+                        <MenuItem mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" />
+                        <MenuItem mnemonicParsing="false" onAction="#addProductScreen" text="Agregar producto" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#addClientScreen" text="Agregar cliente" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#searchClientScreen" text="Buscar cliente" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#importData" text="Importar datos" />
+                        <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#showAbout" text="Acerca de" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <MenuBar prefHeight="25.0" prefWidth="145.0">
+              <menus>
+                <Menu fx:id="time" mnemonicParsing="false" />
+              </menus>
+            </MenuBar>
+         </children>
+      </HBox>
       <BorderPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ;" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

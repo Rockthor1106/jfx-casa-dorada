@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 import model.CasaDorada;
 
 public class Main extends Application{
-	
+        
+        
 		private CasaDoradaGUI casaDoradaGUI;
 		private CasaDorada casaDorada;
 		
@@ -33,6 +34,7 @@ public class Main extends Application{
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Casa Dorada");
 			primaryStage.show();
+
 		}
 
 }
