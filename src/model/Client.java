@@ -25,7 +25,12 @@ public class Client extends Person {
 //		return comment;
 //	}
 	
-    public int compareByName(Client other) {
-        return getName().compareTo(other.getName());
+    public int compareName(Client client) {
+        return getName().compareTo(client.getName());
+    }
+    
+    
+    public int compareLastName(Client client) {
+        return getLastName().compareTo(client.getLastName());
     }
 }

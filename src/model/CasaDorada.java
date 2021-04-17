@@ -14,6 +14,7 @@ public class CasaDorada {
 	public CasaDorada() {
 		employees = new ArrayList<>();
 		products = new ArrayList<>();
+		clients = new ArrayList<>();
 	}
 	
 	//Employee
@@ -39,8 +40,21 @@ public class CasaDorada {
 		return clients; 
 	}
 	
+	
+	//ad clients sorting them
 	public void addClient(String name, String last_name, String id_number, String phone_number, String addres) {
-		clients.add(new Client(name, last_name, id_number,phone_number , addres));
+		Client client = new Client(name, last_name, id_number, phone_number, addres);
+		if (clients.isEmpty()) {
+			clients.add(client);
+		}
+		else {
+			int i = 0;
+			while(i < clients.size() && client.compareName(clients.get(i)) > 0 && client.compareLastName(clients.get(i)) > 0) {
+				i++;
+			}
+			clients.add(i,client);
+		}
+
 	}
-    
+
 }

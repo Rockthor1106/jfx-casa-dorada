@@ -16,11 +16,11 @@ public abstract class Person  {
 		return name;
 	}
 
-	public String getLast_name() {
+	public String getLastName() {
 		return last_name;
 	}
 
-	public String getId_number() {
+	public String getIdNumber() {
 		return id_number;
 	}
 	

@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Order {
 	private String code;
-	private String state;
 	List<Product> products;
 	List<Product> products_amount;
 	private String client;
@@ -14,10 +13,9 @@ public class Order {
 	private Date date;
 	private String comments;
 
-	public Order(String code, String state, List<Product> products, String client, String deliver, Date date,
+	public Order(String code, List<Product> products, String client, String deliver, Date date,
 			String comments) {
 		this.code = code;
-		this.state = state;
 		this.products = products;
 		this.client = client;
 		this.deliver = deliver;
@@ -29,10 +27,6 @@ public class Order {
 
 	public String getCode() {
 		return code;
-	}
-
-	public String getState() {
-		return state;
 	}
 
 	public List<Product> getProducts() {

@@ -142,13 +142,13 @@ public class CasaDoradaGUI {
 			hourOfDay = hourOfDay - 12;
 		}
     	
-        if (hourOfDay < 10 && calendar.get(Calendar.SECOND) < 10) {
+        if (calendar.get(Calendar.MINUTE) < 10 && calendar.get(Calendar.SECOND) < 10) {
             time.setText(String.valueOf(hourOfDay + ":0" + calendar.get(Calendar.MINUTE) + ":0" + calendar.get(Calendar.SECOND)) + " " + amPM);
         } 
-        if (calendar.get(Calendar.MINUTE) < 10) {
+        else if (calendar.get(Calendar.MINUTE) < 10) {
             time.setText(String.valueOf(hourOfDay + ":0" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND)) + " " + amPM);
         } 
-        if (calendar.get(Calendar.SECOND) < 10) {
+        else if (calendar.get(Calendar.SECOND) < 10) {
             time.setText(String.valueOf(hourOfDay + ":" + calendar.get(Calendar.MINUTE) + ":0" + calendar.get(Calendar.SECOND)) + " " + amPM);
         } 
         else {
@@ -161,7 +161,7 @@ public class CasaDoradaGUI {
     	Timeline secundaryTimeline = new Timeline();
     	secundaryTimeline.setCycleCount(Timeline.INDEFINITE);//cycle infinite in this secondary time line
     	
-    	KeyFrame mainKeyFrame = new KeyFrame(new Duration(1000 - calendar.get(Calendar.MILLISECOND) % 1000), 
+    	KeyFrame mainKeyFrame = new KeyFrame(new Duration(1000 - calendar.get(Calendar.MILLISECOND) % 1000),
     			(event) -> { //Lan nomenclature
     				updateClock();
     				secundaryTimeline.play();	
@@ -319,7 +319,8 @@ public class CasaDoradaGUI {
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
     		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
-    		menu.getItems().get(5).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos" visible
+    		menu.getItems().get(6).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -329,7 +330,8 @@ public class CasaDoradaGUI {
     	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
    		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
 		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
-		menu.getItems().get(5).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(5).setVisible(false); //makes the option "importar datos" invisible
+		menu.getItems().get(6).setVisible(false); //makes the option "cerrar sesión" invisible
     }
     
     @FXML
@@ -424,7 +426,10 @@ public class CasaDoradaGUI {
     
     @FXML
     void importData(ActionEvent event) {
-
+    	for (int i = 0; i < casaDorada.getClients().size(); i++) {
+    	  	System.out.println(casaDorada.getClients().get(i).getName() +  " " + casaDorada.getClients().get(i).getLastName());
+		}
+  
     }
 }
 	
