@@ -13,7 +13,7 @@ public class Client extends Person {
 //		this.comment = comment;
 	}
 
-	public String getPhone_number() {
+	public String getPhoneNumber() {
 		return phone_number;
 	}
 
@@ -25,6 +25,7 @@ public class Client extends Person {
 //		return comment;
 //	}
 	
+	//compare using objects of Client type
     public int compareName(Client client) {
         return getName().compareTo(client.getName());
     }
@@ -33,4 +34,14 @@ public class Client extends Person {
     public int compareLastName(Client client) {
         return getLastName().compareTo(client.getLastName());
     }
+    
+   //compare using Strings with user´s name and last name 
+    public int compareName(String str_client_name) {
+        return getName().compareTo(str_client_name);
+    }
+
+    public int compareLastName(String str_client_lastname) {
+        return getLastName().compareTo(str_client_lastname);
+    }
+  
 }

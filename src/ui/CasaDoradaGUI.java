@@ -5,16 +5,20 @@ import java.io.IOException;
 import java.util.Calendar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
@@ -82,6 +86,9 @@ public class CasaDoradaGUI {
     
     @FXML
     private TextField name_searched;
+    
+    @FXML
+    private TableView<Client> tvClientList;
 
     @FXML
     private TableColumn<Client, String> tcName;
@@ -97,6 +104,7 @@ public class CasaDoradaGUI {
 
     @FXML
     private TableColumn<Client, String> tcPhone;
+    
     
     @FXML
     private TextField regNameClient;
@@ -229,7 +237,7 @@ public class CasaDoradaGUI {
 	    alert.showAndWait();
     }
     
-	// Methods
+	// methods to show every screen
 
     @FXML
     void logInScreen(ActionEvent event) throws IOException {
@@ -253,33 +261,54 @@ public class CasaDoradaGUI {
 		mainPane.getChildren().clear();
     	mainPane.setTop(registerScreen);
     }
-
-
     
-	@FXML
-	void LogIn(ActionEvent event) throws IOException {
-		boolean logged = false;
-		boolean username_exists = false;
-		boolean password_exists = false;
-		for(int i = 0; i < casaDorada.getEmployees().size(); i++) {
-			if (casaDorada.getEmployees().get(i).getUsername().equals(strUsername.getText()) == true) {
-				if (password_exists = casaDorada.getEmployees().get(i).getPassword().equals(strPassword.getText())) {
-					username_exists = true;
-					password_exists = true;
-				}
-			}
-
-		}
-		if (username_exists == true && password_exists == true) {
-			logged = true;
-			showLoggedOptions(logged);
-			logInAlert("Inicio de sesión exitoso", AlertType.INFORMATION);
-		}
-		else {
-			logInAlert("Nombre de usuario o contraseña incorrectos", AlertType.ERROR);
-		}
-	}
-
+    @FXML
+    void addProductScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-product.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent addProductScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(addProductScreen);
+    	
+    }
+    
+    @FXML
+    void searchClientScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("search-client.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent searchClientScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(searchClientScreen);
+    	
+    	
+    }
+    
+    @FXML
+    void addClientScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register-client.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent addClientScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(addClientScreen);
+    	
+    }
+    
+    @FXML
+    void showClientsListScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clients-list.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent clientsListScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(clientsListScreen);
+    	initializeTableViewOfClients();
+    }
+    
+    //methods to add
+    
 	@FXML
 	void createAccount(ActionEvent event) throws IOException {
 		
@@ -313,37 +342,6 @@ public class CasaDoradaGUI {
 		}
 	}
 	
-    public void showLoggedOptions(boolean logged) throws IOException {
-    	if (logged == true) {
-    		menu.getItems().get(1).setVisible(false); //makes the option "iniciar sesion" invisible
-    		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
-    		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
-    		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
-    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos" visible
-    		menu.getItems().get(6).setVisible(true); //makes the option "cerrar sesión" visible
-		}
-    }
-    
-    @FXML
-    void singOut(ActionEvent event) {
-    	menu.getItems().get(1).setVisible(true); //makes the option "iniciar sesion" visible
-    	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
-   		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
-		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
-		menu.getItems().get(5).setVisible(false); //makes the option "importar datos" invisible
-		menu.getItems().get(6).setVisible(false); //makes the option "cerrar sesión" invisible
-    }
-    
-    @FXML
-    void addProductScreen(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-product.fxml"));
-		fxmlLoader.setController(this);    	
-		Parent addProductScreen = fxmlLoader.load();
-    	
-		mainPane.getChildren().clear();
-    	mainPane.setTop(addProductScreen);
-    	
-    }
     @FXML
     void addProduct(ActionEvent event) {
     	String name_product = registerNameProduct.getText();
@@ -365,46 +363,13 @@ public class CasaDoradaGUI {
     }
     
     @FXML
-    void searchImage(ActionEvent event) {
-    	
-    }
-   
-
-    @FXML
-    void searchClient(ActionEvent event) {
-
-	}
-    
-    @FXML
-    void addClientScreen(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register-client.fxml"));
-		fxmlLoader.setController(this);    	
-		Parent addClientScreen = fxmlLoader.load();
-    	
-		mainPane.getChildren().clear();
-    	mainPane.setTop(addClientScreen);
-    	
-    }
-    
-    @FXML
-    void searchClientScreen(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("search-client.fxml"));
-		fxmlLoader.setController(this);    	
-		Parent searchClientScreen = fxmlLoader.load();
-    	
-		mainPane.getChildren().clear();
-    	mainPane.setTop(searchClientScreen);
-    	
-    }
-    
-    @FXML
 	void registerClient(ActionEvent event) throws IOException {
  		
 		String registerNameClient = regNameClient.getText();
 		String registerLastNameClient = regLastNameClient.getText();
 		String registerIdClient = regIdClient.getText();
 		String registerPhoneClient = regPhoneClient.getText();
-		String registerAddres = regAddres.getText();
+		String registerAddresClient = regAddres.getText();
 		
 		if(regNameClient.getText().equals("")&&regLastNameClient.getText().equals("")&&regIdClient.getText().equals("")) {
 			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
@@ -419,17 +384,94 @@ public class CasaDoradaGUI {
 			emptyField("Por favor ingrese un numero de identificación", AlertType.WARNING);
 		}
 		else {
-			casaDorada.addClient(registerNameClient, registerLastNameClient, registerIdClient, registerPhoneClient,registerAddres);
+			casaDorada.addClient(registerNameClient, registerLastNameClient, registerIdClient, registerPhoneClient, registerAddresClient);
 			clientRegisteredSuccessfully();
 		}
 	}
+
+    
+    //log in and sing out methods
+    
+	@FXML
+	void LogIn(ActionEvent event) throws IOException {
+		boolean logged = false;
+		boolean username_exists = false;
+		boolean password_exists = false;
+		for(int i = 0; i < casaDorada.getEmployees().size(); i++) {
+			if (casaDorada.getEmployees().get(i).getUsername().equals(strUsername.getText()) == true) {
+				if (password_exists = casaDorada.getEmployees().get(i).getPassword().equals(strPassword.getText())) {
+					username_exists = true;
+					password_exists = true;
+				}
+			}
+
+		}
+		if (username_exists == true && password_exists == true) {
+			logged = true;
+			showLoggedOptions(logged);
+			logInAlert("Inicio de sesión exitoso", AlertType.INFORMATION);
+		}
+		else {
+			logInAlert("Nombre de usuario o contraseña incorrectos", AlertType.ERROR);
+		}
+	}
+
+    public void showLoggedOptions(boolean logged) throws IOException {
+    	if (logged == true) {
+    		menu.getItems().get(1).setVisible(false); //makes the option "iniciar sesion" invisible
+    		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
+    		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
+    		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos" visible
+    		menu.getItems().get(6).setVisible(true); //makes the option "lista de clientes" visible
+    		menu.getItems().get(7).setVisible(true); //makes the option "cerrar sesión" visible
+		}
+    }
+    
+    @FXML
+    void singOut(ActionEvent event) {
+    	menu.getItems().get(1).setVisible(true); //makes the option "iniciar sesion" visible
+    	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
+   		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
+		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
+		menu.getItems().get(5).setVisible(false); //makes the option "importar datos" invisible
+		menu.getItems().get(6).setVisible(false); //makes the option "lista de clientes" invisible
+		menu.getItems().get(7).setVisible(false); //makes the option "cerrar sesión" invisible
+    }
+
+
+    //methods to search
+    
+    @FXML
+    void searchImage(ActionEvent event) {
+    	
+    }
+
+    @FXML
+    void searchClient(ActionEvent event) {
+    	String[]parts = name_searched.getText().split(" ");
+    	System.out.println(casaDorada.binarySearch(parts[0],parts[1]));
+	}
+    
+    //initialize tables view
+    
+	private void initializeTableViewOfClients() {
+    	ObservableList<Client> observableList;
+    	observableList = FXCollections.observableArrayList(casaDorada.getClients());
+    	
+		tvClientList.setItems(observableList);
+		tcName.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
+		tcLastName.setCellValueFactory(new PropertyValueFactory<Client,String>("lastName"));
+		tcID.setCellValueFactory(new PropertyValueFactory<Client,String>("idNumber"));
+		tcPhone.setCellValueFactory(new PropertyValueFactory<Client,String>("addres"));
+		tcAddres.setCellValueFactory(new PropertyValueFactory<Client,String>("phoneNumber"));
+    }
+    
+    //methods to import
     
     @FXML
     void importData(ActionEvent event) {
-    	for (int i = 0; i < casaDorada.getClients().size(); i++) {
-    	  	System.out.println(casaDorada.getClients().get(i).getName() +  " " + casaDorada.getClients().get(i).getLastName());
-		}
-  
+
     }
 }
 	
