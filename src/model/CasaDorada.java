@@ -38,6 +38,10 @@ public class CasaDorada {
 		products.add(new Product(name_product, type, ingredients,size,price));
 	}
 	
+	public void addOrder(String code,int state,String products,int amount_product, String client, String deliver, String date,String comments) {
+		orders.add(new Order(code, state, products, amount_product, client, deliver, date, comments));
+	}
+	
 	public List<Product> getProducts(){
 		return products; 
 	}
@@ -92,6 +96,7 @@ public class CasaDorada {
 	}
 	
 	public void importDataClients(String filename) throws IOException{
+
 		BufferedReader bReader = new BufferedReader(new FileReader(filename));
 		String line = bReader.readLine();
 		while(line != null) {
@@ -113,15 +118,15 @@ public class CasaDorada {
 		bReader.close();
 	}
 	
-//	public void importDataOrders(String filename) throws IOException{
-//		BufferedReader bReader = new BufferedReader(new FileReader(filename));
-//		String line = bReader.readLine();
-//		while(line != null) {
-//			String[] parts = line.split(",");
-//			addClient(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5],parts[6],parts[7]);
-//			line = bReader.readLine();
-//		}
-//		bReader.close();
-//	}
+	public void importDataOrders(String filename) throws IOException{
+		BufferedReader bReader = new BufferedReader(new FileReader(filename));
+		String line = bReader.readLine();
+		while(line != null) {
+			String[] parts = line.split(",");
+			addOrder(parts[0],Integer.parseInt(parts[1]), parts[2], Integer.parseInt(parts[3]),parts[4],parts[5],parts[6],parts[7]);
+			line = bReader.readLine();
+		}
+		bReader.close();
+	}
 
 }

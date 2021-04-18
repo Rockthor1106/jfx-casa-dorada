@@ -32,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import model.CasaDorada;
 import model.Client;
+import model.Order;
 import model.Product;
 
 public class CasaDoradaGUI {
@@ -76,7 +77,7 @@ public class CasaDoradaGUI {
     private ToggleGroup size;
 
     @FXML
-    private ComboBox<?> registerType;
+    private ComboBox<String> registerType;
 
     @FXML
     private RadioButton mediano;
@@ -172,11 +173,37 @@ public class CasaDoradaGUI {
     private TableColumn<Product, String> tcSizeProduct;
 
     @FXML
-    private TableColumn<Product, String> tcPriceProduct;
+    private TableColumn<Product, Double> tcPriceProduct;
     
-
     @FXML
     private Button deleteButton;
+    
+    @FXML
+    private TableView<Order> tvOrdersList;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderCode;
+
+    @FXML
+    private TableColumn<Order, Integer> tcOrderState;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderProducts;
+
+    @FXML
+    private TableColumn<Order, Integer> tcAmount;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderClient;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderDeliver;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderDate;
+
+    @FXML
+    private TableColumn<Order, String> tcOrderComments;
     
     Calendar calendar;
     
@@ -310,6 +337,14 @@ public class CasaDoradaGUI {
 	    alert.show();
     }
 	
+	@FXML
+    public void productAdded() {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Añadir producto");
+	    alert.setHeaderText(":D");
+	    alert.setContentText("Producto añadido");
+	    alert.show();
+    }
     
 	// methods to show every screen
 
@@ -344,6 +379,7 @@ public class CasaDoradaGUI {
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(addProductScreen);
+    	initializeComboBoxTypeProduct();
     	
     }
     
@@ -390,7 +426,21 @@ public class CasaDoradaGUI {
 		mainPane.getChildren().clear();
     	mainPane.setTop(productsListScreen);
     	initializeTableViewOfProducts();
+    	
     }
+    
+    @FXML
+    void showOrdersList(ActionEvent event) throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orders-list.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent ordersListScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(ordersListScreen);
+    	initializeTableViewOfOrders();
+    	
+    }
+    
     
     //methods to add
     
@@ -429,22 +479,45 @@ public class CasaDoradaGUI {
 	
     @FXML
     void addProduct(ActionEvent event) {
-//    	String name_product = registerNameProduct.getText();
-//    	String ingredients = registerIngredients.getText();
-//    	String size = "";
-//    	if (personal.isSelected()) {
-//			size = "Personal";
-//		}
-//    	else if (mediano.isSelected()) {
-//    		size = "Mediano";
-//		}
-//    	else if (familiar.isSelected()) {
-//    		size = "Familiar";
-//			
-//		}
-//    	
-//    	double price = Double.parseDouble(registerPrice.getText());
-//    	casaDorada.addProduct(name_product, ingredients, size, price);
+    	String name_product = registerNameProduct.getText();
+    	String ingredients = registerIngredients.getText();
+    	String type = registerType.getSelectionModel().getSelectedItem();
+    	String strsize = " ";
+    	double price = Double.parseDouble(registerPrice.getText());
+    	if (personal.isSelected()) {
+			strsize = "Personal";
+		}
+    	else if (mediano.isSelected()) {
+    		strsize = "Mediano";
+		}
+    	else if (familiar.isSelected()) {
+    		strsize = "Familiar";
+			
+		}
+    
+    	if (name_product.equals(" ") && ingredients.equals(" ") && type.equals(" ") && strsize.equals(" ") && registerPrice.getText().equals(" ")) {
+    		emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
+		}
+    	else if (name_product.equals(" ")) {
+    		emptyField("Por favor ingrese un nombre para el producto", AlertType.WARNING);
+		}
+    	else if (ingredients.equals(" ")) {
+    		emptyField("Por favor ingrese almenos un ingrediente para el producto", AlertType.WARNING);
+		}
+    	else if (type.equals(" ")) {
+    		emptyField("Por favor seleccione un tipo para el producto", AlertType.WARNING);
+		}
+    	else if (strsize.equals(" ")) {
+    		emptyField("Por favor seleccione un tamaño para el producto", AlertType.WARNING);
+		}
+    	else if (registerPrice.getText().equals(" ")) {
+    		emptyField("Por favor ingrese un precio para el producto", AlertType.WARNING);
+		}
+    	else {
+    		casaDorada.addProduct(name_product, ingredients, type, strsize,price);
+    		productAdded();
+		}	 
+    	
     }
     
     @FXML
@@ -457,7 +530,9 @@ public class CasaDoradaGUI {
 		String registerAddresClient = regAddres.getText();
 		String registerCommentClient = regComments.getText();
 		
-		if(regNameClient.getText().equals("")&&regLastNameClient.getText().equals("")&&regIdClient.getText().equals("")) {
+		if(regNameClient.getText().equals("") && regLastNameClient.getText().equals("") && regIdClient.getText().equals("") 
+			&& regPhoneClient.getText().equals(" ") && regAddres.getText().equals(" ") && regComments.getText().equals(" ")) {
+			
 			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
 		}
 		else if (regNameClient.getText().equals("")) {
@@ -510,9 +585,11 @@ public class CasaDoradaGUI {
     		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
     		menu.getItems().get(5).setVisible(true); //makes the option "importar datos de clientes" visible
     		menu.getItems().get(6).setVisible(true); //makes the option "importar datos de productos" visible
-    		menu.getItems().get(7).setVisible(true); //makes the option "lista de clientes" visible
-    		menu.getItems().get(8).setVisible(true); //makes the option "lista de productos" visible
-    		menu.getItems().get(9).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(7).setVisible(true); //makes the option "importar datos de ordenes" visible
+    		menu.getItems().get(8).setVisible(true); //makes the option "lista de clientes" visible
+    		menu.getItems().get(9).setVisible(true); //makes the option "lista de productos" visible
+    		menu.getItems().get(10).setVisible(true); //makes the option "lista de ordenes" visible
+    		menu.getItems().get(11).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -524,9 +601,11 @@ public class CasaDoradaGUI {
 		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
 		menu.getItems().get(5).setVisible(false); //makes the option "importar datos de clientes" invisible
 		menu.getItems().get(6).setVisible(false); //makes the option "importar datos de productos" invisible
-		menu.getItems().get(7).setVisible(false); //makes the option "lista de clientes" invisible
-		menu.getItems().get(8).setVisible(false); //makes the option "lista de productos" invisible
-		menu.getItems().get(9).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(7).setVisible(false); //makes the option "importar datos de ordenes" invisible
+		menu.getItems().get(8).setVisible(false); //makes the option "lista de clientes" invisible
+		menu.getItems().get(9).setVisible(false); //makes the option "lista de productos" invisible
+		menu.getItems().get(10).setVisible(false); //makes the option "lista de ordenes" invisible
+		menu.getItems().get(11).setVisible(false); //makes the option "cerrar sesión" invisible
     }
 
 
@@ -588,8 +667,30 @@ public class CasaDoradaGUI {
 		tcTypeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("type"));
 		tcIngredientsProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("ingredient"));
 		tcSizeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("size"));
-		tcPriceProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("price"));
+		tcPriceProduct.setCellValueFactory(new PropertyValueFactory<Product,Double>("price"));
 		
+	}
+	
+	private void initializeTableViewOfOrders() throws FileNotFoundException {
+    	ObservableList<Order> observableList;
+    	observableList = FXCollections.observableArrayList(casaDorada.getOrders());
+    	
+		tvOrdersList.setItems(observableList);
+		tcOrderCode.setCellValueFactory(new PropertyValueFactory<Order,String>("code"));
+		tcOrderState.setCellValueFactory(new PropertyValueFactory<Order,Integer>("state"));
+		tcOrderProducts.setCellValueFactory(new PropertyValueFactory<Order,String>("products"));
+		tcAmount.setCellValueFactory(new PropertyValueFactory<Order,Integer>("amountProduct"));
+		tcOrderClient.setCellValueFactory(new PropertyValueFactory<Order,String>("client"));
+		tcOrderDeliver.setCellValueFactory(new PropertyValueFactory<Order,String>("deliver"));
+		tcOrderDate.setCellValueFactory(new PropertyValueFactory<Order,String>("date"));
+		tcOrderComments.setCellValueFactory(new PropertyValueFactory<Order,String>("comments"));
+	}
+	
+	//initialize combo box
+	public void initializeComboBoxTypeProduct() {
+        ObservableList<String> types = FXCollections.observableArrayList("Plato principal","Adicional","Bebida");
+        registerType.setValue("Seleccionar");
+        registerType.setItems(types);
 	}
     
     //methods to import
@@ -627,6 +728,28 @@ public class CasaDoradaGUI {
    	     alert.setTitle("Importar datos de productos");
    	     try {
    	    	 casaDorada.importDataProducts(file.getAbsolutePath());
+   	    	 alert.setContentText("Datos importados exitosamente");
+   	    	 alert.showAndWait();
+   	     }catch(IOException e) {
+   	    	 alert.setContentText("Los datos no fueron importado. Ha ocurrido un error");
+   	    	 alert.showAndWait();
+   	    	 e.printStackTrace();
+
+   	     }
+		}
+    }
+    
+    @FXML
+    void importDataOrders(ActionEvent event) {
+    	
+    	FileChooser fChooser = new FileChooser();
+    	fChooser.setTitle("Importar datos de ordenes");
+    	File file = fChooser.showOpenDialog(mainPane.getScene().getWindow());
+    	if (file != null) {
+   	     Alert alert = new Alert(AlertType.INFORMATION);
+   	     alert.setTitle("Importar datos de ordenes");
+   	     try {
+   	    	 casaDorada.importDataOrders(file.getAbsolutePath());
    	    	 alert.setContentText("Datos importados exitosamente");
    	    	 alert.showAndWait();
    	     }catch(IOException e) {

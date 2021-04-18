@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="Ordenes" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <TableView fx:id="tvOrdersList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="tcOrderCode" prefWidth="72.0" text="Código" />
+          <TableColumn fx:id="tcOrderState" prefWidth="81.0" text="Estado" />
+            <TableColumn fx:id="tcOrderProducts" prefWidth="233.0" text="Productos" />
+            <TableColumn fx:id="tcAmount" prefWidth="68.0" text="Cantidad" />
+            <TableColumn fx:id="tcOrderClient" prefWidth="97.0" text="Cliente" />
+            <TableColumn fx:id="tcOrderDeliver" prefWidth="106.0" text="Repartidor" />
+            <TableColumn fx:id="tcOrderDate" prefWidth="140.0" text="Fecha y hora" />
+            <TableColumn fx:id="tcOrderComments" prefWidth="167.0" text="Comentarios del cliente" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

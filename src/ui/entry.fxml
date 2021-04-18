@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="25.0" prefWidth="600.0">
          <children>
-            <MenuBar prefHeight="25.0" prefWidth="531.0">
+            <MenuBar prefHeight="25.0" prefWidth="1054.0">
               <menus>
                 <Menu fx:id="menu" mnemonicParsing="false" text="Opciones">
                   <items>
@@ -22,8 +22,10 @@
                         <MenuItem mnemonicParsing="false" onAction="#searchClientScreen" text="Buscar cliente" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataClients" text="Importar datos de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataProducts" text="Importar datos de productos" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#importDataOrders" text="Importar datos de ordenes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showClientsListScreen" text="Lista de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showProductsListScreen" text="Lista de productos" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#showOrdersList" text="Lista de ordenes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
                   </items>
                 </Menu>
@@ -34,13 +36,13 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <MenuBar prefHeight="25.0" prefWidth="145.0">
+            <MenuBar prefHeight="25.0" prefWidth="464.0">
               <menus>
                 <Menu fx:id="time" mnemonicParsing="false" />
               </menus>
             </MenuBar>
          </children>
       </HBox>
-      <BorderPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ;" VBox.vgrow="ALWAYS" />
+      <BorderPane fx:id="mainPane" prefHeight="575.0" prefWidth="965.0" style="-fx-background-color: ;" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

@@ -14,69 +14,89 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="483.0" prefWidth="965.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane prefHeight="374.0" prefWidth="965.0">
                <center>
-                  <GridPane prefHeight="173.0" prefWidth="295.0" BorderPane.alignment="CENTER">
+                  <GridPane prefHeight="240.0" prefWidth="965.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="219.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="267.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="686.0" minWidth="10.0" prefWidth="514.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="514.0" minWidth="10.0" prefWidth="451.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="5.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="174.0" minHeight="0.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="189.0" minHeight="5.0" prefHeight="71.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
-                           <center>
-                              <Label text="Nombre:" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </center>
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Nombre:" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </right>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                           <center>
-                              <Label text="Ingredientes" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </center>
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Ingredientes" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </right>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                           <center>
-                              <Label text="Tamaño:" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </center>
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Tamaño:" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </right>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                           <center>
-                              <Label text="Tipo:" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </center>
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Tipo:" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </right>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-                           <center>
-                              <Label text="Precio:" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </center>
+                        <BorderPane prefHeight="190.0" prefWidth="548.0" GridPane.rowIndex="4">
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <Label text="Precio:" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                           </right>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <left>
@@ -88,12 +108,12 @@
                               <TextField fx:id="registerIngredients" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </left>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <BorderPane prefHeight="191.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <left>
                               <TextField fx:id="registerPrice" prefHeight="25.0" prefWidth="99.0" BorderPane.alignment="CENTER" />
                            </left>
                         </BorderPane>
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <HBox prefHeight="68.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
                               <BorderPane prefHeight="44.0" prefWidth="207.0">
                                  <center>
@@ -104,7 +124,7 @@
                                     </RadioButton>
                                  </center>
                                  <right>
-                                    <RadioButton mnemonicParsing="false" text="Familiar" toggleGroup="$size" BorderPane.alignment="CENTER" />
+                                    <RadioButton fx:id="familiar" mnemonicParsing="false" text="Familiar" toggleGroup="$size" BorderPane.alignment="CENTER" />
                                  </right>
                                  <left>
                                     <RadioButton fx:id="personal" mnemonicParsing="false" text="Personal" toggleGroup="$size" BorderPane.alignment="CENTER" />
@@ -117,11 +137,11 @@
                   </GridPane>
                </center>
             </BorderPane>
-            <BorderPane prefHeight="84.0" prefWidth="600.0">
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
                   <Button mnemonicParsing="false" onAction="#addProduct" text="Añadir" BorderPane.alignment="CENTER">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="16.0" />
                      </font>
                   </Button>
                </center>

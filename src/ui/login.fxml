@@ -4,66 +4,68 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <BorderPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <bottom>
-            <Label text="INICIAR SESION" BorderPane.alignment="CENTER">
+            <Label text="INICIAR SESIÓN" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="26.0" />
                </font>
             </Label>
          </bottom>
-         <center>
-            <ImageView fitHeight="79.0" fitWidth="600.0" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../../../../Pictures/banner.jpg" />
-               </image>
-            </ImageView>
-         </center>
       </BorderPane>
    </top>
    <center>
-      <GridPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="195.0" prefWidth="937.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="295.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="305.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="727.0" minWidth="10.0" prefWidth="471.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="621.0" minWidth="0.0" prefWidth="463.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="111.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <Label text="Nombre de usuario:" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </center>
+            <BorderPane prefHeight="192.0" prefWidth="487.0">
+               <right>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <Label text="Nombre de usuario:" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </bottom>
+                  </BorderPane>
+               </right>
             </BorderPane>
-            <BorderPane prefHeight="90.0" prefWidth="303.0" GridPane.rowIndex="1">
-               <center>
-                  <Label text="Contraseña: " BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </center>
+            <BorderPane prefHeight="103.0" prefWidth="487.0" GridPane.rowIndex="1">
+               <right>
+                  <BorderPane prefHeight="117.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <Label text="Contraseña: " BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+               </right>
             </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <BorderPane prefHeight="300.0" prefWidth="643.0" GridPane.columnIndex="1">
                <left>
-                  <TextField fx:id="strUsername" prefHeight="25.0" prefWidth="199.0" BorderPane.alignment="CENTER" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <TextField fx:id="strUsername" prefHeight="25.0" prefWidth="199.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
                </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -71,16 +73,19 @@
                   <PasswordField fx:id="strPassword" prefHeight="25.0" prefWidth="199.0" BorderPane.alignment="CENTER" />
                </left>
             </BorderPane>
-            <BorderPane prefHeight="112.0" prefWidth="295.0" GridPane.rowIndex="2">
-               <center>
-                  <Button mnemonicParsing="false" onAction="#LogIn" text="Iniciar Sesión" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-               </center>
-            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
          </children>
       </GridPane>
    </center>
+   <bottom>
+      <BorderPane prefHeight="215.0" prefWidth="965.0" BorderPane.alignment="CENTER">
+         <center>
+            <Button mnemonicParsing="false" onAction="#LogIn" text="Iniciar sesión" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </center>
+      </BorderPane>
+   </bottom>
 </BorderPane>
