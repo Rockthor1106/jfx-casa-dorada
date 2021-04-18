@@ -4,7 +4,6 @@ package ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Calendar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import model.CasaDorada;
 import model.Client;
+import model.Product;
 
 public class CasaDoradaGUI {
 
@@ -155,6 +156,28 @@ public class CasaDoradaGUI {
     @FXML
     private Label miliseconds;
     
+    @FXML
+    private TableView<Product> tvProductsList;
+
+    @FXML
+    private TableColumn<Product, String> tcNameProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcTypeProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcIngredientsProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcSizeProduct;
+
+    @FXML
+    private TableColumn<Product, String> tcPriceProduct;
+    
+
+    @FXML
+    private Button deleteButton;
+    
     Calendar calendar;
     
     private CasaDorada casaDorada;
@@ -176,7 +199,9 @@ public class CasaDoradaGUI {
     	int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
     	String amPM = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
     	if (amPM.equals("PM")) {
-			hourOfDay = hourOfDay - 12;
+			if (hourOfDay != 12) {
+				hourOfDay = hourOfDay -12;
+			}
 		}
     	
         if (calendar.get(Calendar.MINUTE) < 10 && calendar.get(Calendar.SECOND) < 10) {
@@ -275,6 +300,16 @@ public class CasaDoradaGUI {
 	    alert.setContentText("No hay coincidencias con el nombre y apellido ingresado");
 	    alert.show();
     }
+	
+	@FXML
+    public void ClientDeleted() {
+	    Alert alert = new Alert(AlertType.INFORMATION);
+	    alert.setTitle("Eliminar cliente");
+	    alert.setHeaderText(":D");
+	    alert.setContentText("Cliente eliminado");
+	    alert.show();
+    }
+	
     
 	// methods to show every screen
 
@@ -346,6 +381,17 @@ public class CasaDoradaGUI {
     	initializeTableViewOfClients();
     }
     
+    @FXML
+    void showProductsListScreen(ActionEvent event) throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("products-list.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent productsListScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(productsListScreen);
+    	initializeTableViewOfProducts();
+    }
+    
     //methods to add
     
 	@FXML
@@ -383,22 +429,22 @@ public class CasaDoradaGUI {
 	
     @FXML
     void addProduct(ActionEvent event) {
-    	String name_product = registerNameProduct.getText();
-    	String ingredients = registerIngredients.getText();
-    	String size = "";
-    	if (personal.isSelected()) {
-			size = "Personal";
-		}
-    	else if (mediano.isSelected()) {
-    		size = "Mediano";
-		}
-    	else if (familiar.isSelected()) {
-    		size = "Familiar";
-			
-		}
-    	
-    	double price = Double.parseDouble(registerPrice.getText());
-    	casaDorada.addProduct(name_product, ingredients, size, price);
+//    	String name_product = registerNameProduct.getText();
+//    	String ingredients = registerIngredients.getText();
+//    	String size = "";
+//    	if (personal.isSelected()) {
+//			size = "Personal";
+//		}
+//    	else if (mediano.isSelected()) {
+//    		size = "Mediano";
+//		}
+//    	else if (familiar.isSelected()) {
+//    		size = "Familiar";
+//			
+//		}
+//    	
+//    	double price = Double.parseDouble(registerPrice.getText());
+//    	casaDorada.addProduct(name_product, ingredients, size, price);
     }
     
     @FXML
@@ -462,9 +508,11 @@ public class CasaDoradaGUI {
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
     		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
-    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos" visible
-    		menu.getItems().get(6).setVisible(true); //makes the option "lista de clientes" visible
-    		menu.getItems().get(7).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos de clientes" visible
+    		menu.getItems().get(6).setVisible(true); //makes the option "importar datos de productos" visible
+    		menu.getItems().get(7).setVisible(true); //makes the option "lista de clientes" visible
+    		menu.getItems().get(8).setVisible(true); //makes the option "lista de productos" visible
+    		menu.getItems().get(9).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -474,9 +522,11 @@ public class CasaDoradaGUI {
     	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
    		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
 		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
-		menu.getItems().get(5).setVisible(false); //makes the option "importar datos" invisible
-		menu.getItems().get(6).setVisible(false); //makes the option "lista de clientes" invisible
-		menu.getItems().get(7).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(5).setVisible(false); //makes the option "importar datos de clientes" invisible
+		menu.getItems().get(6).setVisible(false); //makes the option "importar datos de productos" invisible
+		menu.getItems().get(7).setVisible(false); //makes the option "lista de clientes" invisible
+		menu.getItems().get(8).setVisible(false); //makes the option "lista de productos" invisible
+		menu.getItems().get(9).setVisible(false); //makes the option "cerrar sesión" invisible
     }
 
 
@@ -488,9 +538,11 @@ public class CasaDoradaGUI {
     }
 
     @FXML
-    void searchClient(ActionEvent event) {
+    int searchClient(ActionEvent event) {
     	String[]parts = name_searched.getText().split(" ");
+    	long start = System.nanoTime();
     	int pos = casaDorada.searchClients(parts[0],parts[1]);
+    	long end = System.nanoTime();
     	
     	if (pos != -1) {
         	foundName.setText(casaDorada.getClients().get(pos).getName());
@@ -499,10 +551,16 @@ public class CasaDoradaGUI {
         	foundPhone.setText(casaDorada.getClients().get(pos).getPhoneNumber());	
         	foundAddres.setText(casaDorada.getClients().get(pos).getAddres());
         	foundComments.setText(casaDorada.getClients().get(pos).getComments());
+        	miliseconds.setText("Busqueda realizada en " + (end - start) + " nanosegundos");
+        	deleteButton.setVisible(true);
+    
 		}
     	else {
 			clientNotFound();
+			deleteButton.setVisible(false);
 		}
+    	
+    	return pos;
     }
     
     //initialize tables view
@@ -520,11 +578,25 @@ public class CasaDoradaGUI {
 		tcComments.setCellValueFactory(new PropertyValueFactory<Client,String>("comments"));
 		
 	}
+	
+	private void initializeTableViewOfProducts() throws FileNotFoundException {
+    	ObservableList<Product> observableList;
+    	observableList = FXCollections.observableArrayList(casaDorada.getProducts());
+    	
+		tvProductsList.setItems(observableList);
+		tcNameProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("nameProduct"));
+		tcTypeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("type"));
+		tcIngredientsProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("ingredient"));
+		tcSizeProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("size"));
+		tcPriceProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("price"));
+		
+	}
     
     //methods to import
     
     @FXML
     void importDataClients(ActionEvent event) {
+    	
     	FileChooser fChooser = new FileChooser();
     	fChooser.setTitle("Importar datos de clientes");
     	File file = fChooser.showOpenDialog(mainPane.getScene().getWindow());
@@ -543,6 +615,40 @@ public class CasaDoradaGUI {
    	     }
 		}
     }
+    
+    @FXML
+    void importDataProducts(ActionEvent event) {
+    	
+    	FileChooser fChooser = new FileChooser();
+    	fChooser.setTitle("Importar datos de productos");
+    	File file = fChooser.showOpenDialog(mainPane.getScene().getWindow());
+    	if (file != null) {
+   	     Alert alert = new Alert(AlertType.INFORMATION);
+   	     alert.setTitle("Importar datos de productos");
+   	     try {
+   	    	 casaDorada.importDataProducts(file.getAbsolutePath());
+   	    	 alert.setContentText("Datos importados exitosamente");
+   	    	 alert.showAndWait();
+   	     }catch(IOException e) {
+   	    	 alert.setContentText("Los datos no fueron importado. Ha ocurrido un error");
+   	    	 alert.showAndWait();
+   	    	 e.printStackTrace();
+
+   	     }
+		}
+    }
+    
+    //other methods
+    
+    @FXML
+    void deleteClient(ActionEvent event) {
+    	int pos_to_delete = searchClient(event);
+    	if (pos_to_delete!=1) {
+    		casaDorada.getClients().remove(pos_to_delete);
+    		ClientDeleted();
+    	}
+    }
+    
 }
 	
 

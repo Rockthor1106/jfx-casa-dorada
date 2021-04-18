@@ -1,20 +1,26 @@
 package model;
 
 public class Product {
-	private String product_name;
+	private String name_product;
+	private String type;
 	private String ingredient;
 	private String size;
 	private double price;
 
-	public Product(String product_name, String ingredient, String size, double price) {
-		this.product_name = product_name;
+	public Product(String name_product, String type, String ingredient, String size, double price) {
+		this.name_product = name_product;
+		this.type = type;
 		this.ingredient = ingredient;
 		this.size = size;
 		this.price = price;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getNameProduct() {
+		return name_product;
+	}
+	
+	public String getType() {
+		return type;
 	}
 
 	public String getIngredient() {
