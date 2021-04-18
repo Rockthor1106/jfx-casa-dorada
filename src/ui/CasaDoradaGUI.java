@@ -1,7 +1,10 @@
 package ui;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +23,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -105,6 +110,8 @@ public class CasaDoradaGUI {
     @FXML
     private TableColumn<Client, String> tcPhone;
     
+    @FXML
+    private TableColumn<Client, String> tcComments;
     
     @FXML
     private TextField regNameClient;
@@ -122,10 +129,32 @@ public class CasaDoradaGUI {
     private TextField regAddres;
     
     @FXML
+    private TextField regComments;
+    
+    @FXML
     private Menu time;
 
+    @FXML
+    private Label foundName;
 
+    @FXML
+    private Label foundIDNumber;
 
+    @FXML
+    private Label foundPhone;
+
+    @FXML
+    private Label foundAddres;
+
+    @FXML
+    private Label foundComments;
+
+    @FXML
+    private Label foundLastName;
+
+    @FXML
+    private Label miliseconds;
+    
     Calendar calendar;
     
     private CasaDorada casaDorada;
@@ -191,13 +220,14 @@ public class CasaDoradaGUI {
 	
 	// Alerts
 	@FXML
-    public void logInAlert(String msg, AlertType alertType) {
+    public void logInAlert(String msg, AlertType alertType, String headerText) {
 	    Alert alert = new Alert(alertType);
 	    alert.setTitle("Iniciar sesión");
-	    alert.setHeaderText(":D");
+	    alert.setHeaderText(headerText);
 	    alert.setContentText(msg);
 	    alert.show();
     }
+	
     @FXML
     public void accountCreatedSuccessfully() {
 	    Alert alert = new Alert(AlertType.INFORMATION);
@@ -235,6 +265,15 @@ public class CasaDoradaGUI {
 	    alert.setHeaderText("Creditos:");
 	    alert.setContentText("Jhan Carlos Carvajal Bastidas");
 	    alert.showAndWait();
+    }
+    
+	@FXML
+    public void clientNotFound() {
+	    Alert alert = new Alert(AlertType.ERROR);
+	    alert.setTitle("Buscar cliente");
+	    alert.setHeaderText(":C");
+	    alert.setContentText("No hay coincidencias con el nombre y apellido ingresado");
+	    alert.show();
     }
     
 	// methods to show every screen
@@ -370,6 +409,7 @@ public class CasaDoradaGUI {
 		String registerIdClient = regIdClient.getText();
 		String registerPhoneClient = regPhoneClient.getText();
 		String registerAddresClient = regAddres.getText();
+		String registerCommentClient = regComments.getText();
 		
 		if(regNameClient.getText().equals("")&&regLastNameClient.getText().equals("")&&regIdClient.getText().equals("")) {
 			emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);
@@ -384,7 +424,7 @@ public class CasaDoradaGUI {
 			emptyField("Por favor ingrese un numero de identificación", AlertType.WARNING);
 		}
 		else {
-			casaDorada.addClient(registerNameClient, registerLastNameClient, registerIdClient, registerPhoneClient, registerAddresClient);
+			casaDorada.addClient(registerNameClient, registerLastNameClient, registerIdClient, registerPhoneClient, registerAddresClient, registerCommentClient);
 			clientRegisteredSuccessfully();
 		}
 	}
@@ -409,10 +449,10 @@ public class CasaDoradaGUI {
 		if (username_exists == true && password_exists == true) {
 			logged = true;
 			showLoggedOptions(logged);
-			logInAlert("Inicio de sesión exitoso", AlertType.INFORMATION);
+			logInAlert("Inicio de sesión exitoso", AlertType.INFORMATION,":D");
 		}
 		else {
-			logInAlert("Nombre de usuario o contraseña incorrectos", AlertType.ERROR);
+			logInAlert("Nombre de usuario o contraseña incorrectos", AlertType.ERROR,":C");
 		}
 	}
 
@@ -450,12 +490,24 @@ public class CasaDoradaGUI {
     @FXML
     void searchClient(ActionEvent event) {
     	String[]parts = name_searched.getText().split(" ");
-    	System.out.println(casaDorada.binarySearch(parts[0],parts[1]));
-	}
+    	int pos = casaDorada.searchClients(parts[0],parts[1]);
+    	
+    	if (pos != -1) {
+        	foundName.setText(casaDorada.getClients().get(pos).getName());
+        	foundLastName.setText(casaDorada.getClients().get(pos).getLastName());
+        	foundIDNumber.setText(casaDorada.getClients().get(pos).getIdNumber());
+        	foundPhone.setText(casaDorada.getClients().get(pos).getPhoneNumber());	
+        	foundAddres.setText(casaDorada.getClients().get(pos).getAddres());
+        	foundComments.setText(casaDorada.getClients().get(pos).getComments());
+		}
+    	else {
+			clientNotFound();
+		}
+    }
     
     //initialize tables view
     
-	private void initializeTableViewOfClients() {
+	private void initializeTableViewOfClients() throws FileNotFoundException {
     	ObservableList<Client> observableList;
     	observableList = FXCollections.observableArrayList(casaDorada.getClients());
     	
@@ -463,15 +515,33 @@ public class CasaDoradaGUI {
 		tcName.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
 		tcLastName.setCellValueFactory(new PropertyValueFactory<Client,String>("lastName"));
 		tcID.setCellValueFactory(new PropertyValueFactory<Client,String>("idNumber"));
-		tcPhone.setCellValueFactory(new PropertyValueFactory<Client,String>("addres"));
-		tcAddres.setCellValueFactory(new PropertyValueFactory<Client,String>("phoneNumber"));
-    }
+		tcPhone.setCellValueFactory(new PropertyValueFactory<Client,String>("phoneNumber"));
+		tcAddres.setCellValueFactory(new PropertyValueFactory<Client,String>("addres"));
+		tcComments.setCellValueFactory(new PropertyValueFactory<Client,String>("comments"));
+		
+	}
     
     //methods to import
     
     @FXML
-    void importData(ActionEvent event) {
+    void importDataClients(ActionEvent event) {
+    	FileChooser fChooser = new FileChooser();
+    	fChooser.setTitle("Importar datos de clientes");
+    	File file = fChooser.showOpenDialog(mainPane.getScene().getWindow());
+    	if (file != null) {
+   	     Alert alert = new Alert(AlertType.INFORMATION);
+   	     alert.setTitle("Importar datos de clientes");
+   	     try {
+   	    	 casaDorada.importDataClients(file.getAbsolutePath());
+   	    	 alert.setContentText("Datos importados exitosamente");
+   	    	 alert.showAndWait();
+   	     }catch(IOException e) {
+   	    	 alert.setContentText("Los datos no fueron importado. Ha ocurrido un error");
+   	    	 alert.showAndWait();
+   	    	 e.printStackTrace();
 
+   	     }
+		}
     }
 }
 	

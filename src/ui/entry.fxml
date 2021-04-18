@@ -20,7 +20,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addProductScreen" text="Agregar producto" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#addClientScreen" text="Agregar cliente" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#searchClientScreen" text="Buscar cliente" visible="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#importData" text="Importar datos" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#importDataClients" text="Importar datos de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showClientsListScreen" text="Lista de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
                   </items>

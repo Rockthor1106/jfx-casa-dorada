@@ -1,5 +1,8 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,14 +45,14 @@ public class CasaDorada {
 	
 	
 	//add clients sorting them
-	public void addClient(String name, String last_name, String id_number, String phone_number, String addres) {
-		Client client = new Client(name, last_name, id_number, phone_number, addres);
+	public void addClient(String name, String last_name, String id_number, String phone_number, String addres, String comments) {
+		Client client = new Client(name, last_name, id_number, phone_number, addres, comments);
 		if (clients.isEmpty()) {
 			clients.add(client);
 		}
 		else {
 			int i = 0;
-			while(i < clients.size() && client.compareName(clients.get(i)) > 0) {
+			while(i < clients.size() && client.compareNameAndLastName(clients.get(i)) > 0) {
 				i++;
 			}
 			clients.add(i,client);
@@ -57,17 +60,18 @@ public class CasaDorada {
 
 	}
 	
-	public int binarySearch(String name, String last_name) {
+	public int searchClients(String name, String last_name) {
+		
 		int pos = -1;
 		int i = 0;
 		int j = clients.size() - 1;
 		
 		while(i <= j && pos < 0) {
 			int m = (i + j) / 2;
-			if (clients.get(m).compareName(name) == 0 && clients.get(m).compareLastName(last_name) == 0) {
+			if (clients.get(m).compareNameAndLastName(name + " " + last_name) == 0) {
 				pos = m;
 			}
-			else if (clients.get(m).compareName(name) < 0 && clients.get(m).compareLastName(last_name) < 0) {
+			else if (clients.get(m).compareNameAndLastName(name + " " + last_name) < 0) {
 				i = m + 1;
 			}
 			else {
@@ -76,6 +80,17 @@ public class CasaDorada {
 		}
 		
 		return pos;	
+	}
+	
+	public void importDataClients(String filename) throws IOException{
+		BufferedReader bReader = new BufferedReader(new FileReader(filename));
+		String line = bReader.readLine();
+		while(line != null) {
+			String[] parts = line.split(",");
+			addClient(parts[0],parts[1],parts[2],parts[3],parts[4],parts[5]);
+			line = bReader.readLine();
+		}
+		bReader.close();
 	}
 
 }
