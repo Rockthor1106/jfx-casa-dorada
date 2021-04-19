@@ -1,12 +1,14 @@
 package model;
 
-public class Product implements Comparable<Product>{
+
+public class Product{
+
 	private String name_product;
 	private String type;
 	private String ingredient;
 	private String size;
 	private double price;
-
+	
 	public Product(String name_product, String type, String ingredient, String size, double price) {
 		this.name_product = name_product;
 		this.type = type;
@@ -34,11 +36,11 @@ public class Product implements Comparable<Product>{
 	public double getPrice() {
 		return price;
 	}
-
-	@Override
-	public int compareTo(Product product) {
-		return 0;
-//		return this.price-product.getPrice();	
-	}
+	
+	//this method is use to search by name 
+	
+	public int compareNameProduct(String product_name) {
+        return getNameProduct().compareToIgnoreCase(product_name);
+    }
 
 }

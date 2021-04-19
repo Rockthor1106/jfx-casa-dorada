@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,14 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <BorderPane prefHeight="61.0" prefWidth="860.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="37.0" prefWidth="860.0" BorderPane.alignment="CENTER">
          <left>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="39.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <Label text="codigo" BorderPane.alignment="CENTER">
+                  <Label fx:id="code" text="codigo" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -94,12 +96,117 @@
       </BorderPane>
    </top>
    <right>
-      <VBox prefHeight="612.0" prefWidth="398.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="538.0" prefWidth="443.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="24.0" prefWidth="443.0">
+               <center>
+                  <Label text="Productos" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+            <HBox prefHeight="139.0" prefWidth="443.0">
+               <children>
+                  <BorderPane prefHeight="178.0" prefWidth="6.0" />
+                  <TableView fx:id="tvProductsList" prefHeight="119.0" prefWidth="425.0">
+                    <columns>
+                      <TableColumn fx:id="tcNameProduct" prefWidth="73.0" text="Nombre" />
+                      <TableColumn fx:id="tcTypeProduct" prefWidth="87.0" text="Tipo" />
+                        <TableColumn fx:id="tcIngredientsProduct" prefWidth="126.0" text="Ingredientes" />
+                        <TableColumn fx:id="tcSizeProduct" minWidth="0.0" prefWidth="69.0" text="Tamaño" />
+                        <TableColumn fx:id="tcPriceProduct" prefWidth="69.0" text="Precio" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <VBox prefHeight="191.0" prefWidth="443.0">
+               <children>
+                  <BorderPane prefHeight="31.0" prefWidth="200.0">
+                     <center>
+                        <Label text="Orden" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <HBox prefHeight="105.0" prefWidth="443.0">
+                     <children>
+                        <BorderPane prefHeight="133.0" prefWidth="6.0" />
+                        <TableView fx:id="tvOrderProducts" prefHeight="104.0" prefWidth="427.0">
+                          <columns>
+                            <TableColumn fx:id="tcOrderProduct" prefWidth="68.0" text="Producto" />
+                            <TableColumn fx:id="tcOrderAmountProduct" prefWidth="215.0" text="Cantidad" />
+                              <TableColumn fx:id="tcOrderSizeProduct" prefWidth="77.0" text="Tamaño" />
+                              <TableColumn fx:id="tcOrderPriceProduct" prefWidth="65.0" text="Precio" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="29.0" prefWidth="443.0">
+                     <children>
+                        <BorderPane prefHeight="29.0" prefWidth="146.0">
+                           <left>
+                              <Button mnemonicParsing="false" onAction="#searchOrderProduct" prefHeight="29.0" prefWidth="128.0" text="Buscar para añadir" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Button>
+                           </left>
+                        </BorderPane>
+                        <BorderPane prefHeight="29.0" prefWidth="137.0">
+                           <left>
+                              <TextField fx:id="productToAdd" prefHeight="25.0" prefWidth="162.0" BorderPane.alignment="CENTER" />
+                           </left>
+                        </BorderPane>
+                        <BorderPane prefHeight="29.0" prefWidth="172.0">
+                           <left>
+                              <Button mnemonicParsing="false" onAction="#addToOrder" text="Añadir" BorderPane.alignment="CENTER" />
+                           </left>
+                        </BorderPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="100.0" prefWidth="81.0">
+                     <center>
+                        <Label text="Total: $" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="100.0" prefWidth="129.0">
+                     <center>
+                        <Label fx:id="total" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <Button mnemonicParsing="false" onAction="#addOrder" text="Registrar" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </center>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children></VBox>
    </right>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="538.0" prefWidth="402.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="91.0" prefWidth="718.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="463.0">
                      <children>
@@ -112,9 +219,9 @@
                               </Label>
                            </center>
                         </BorderPane>
-                        <HBox prefHeight="40.0" prefWidth="463.0">
+                        <HBox prefHeight="36.0" prefWidth="449.0">
                            <children>
-                              <BorderPane prefHeight="40.0" prefWidth="210.0">
+                              <BorderPane prefHeight="36.0" prefWidth="162.0">
                                  <right>
                                     <BorderPane prefHeight="40.0" prefWidth="127.0" BorderPane.alignment="CENTER">
                                        <center>
@@ -149,11 +256,8 @@
             </HBox>
             <HBox prefHeight="59.0" prefWidth="462.0">
                <children>
-                  <BorderPane prefHeight="126.0" prefWidth="61.0" />
-                  <BorderPane prefHeight="97.0" prefWidth="150.0">
-                     <center>
-                        <TextField fx:id="foundName" prefHeight="25.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
-                     </center>
+                  <BorderPane prefHeight="47.0" prefWidth="26.0" />
+                  <BorderPane prefHeight="47.0" prefWidth="128.0">
                      <top>
                         <Label text="Nombre" BorderPane.alignment="CENTER">
                            <font>
@@ -161,10 +265,13 @@
                            </font>
                         </Label>
                      </top>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <right>
-                        <TextField fx:id="foundLastName" prefHeight="25.0" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                        <TextField fx:id="foundName" prefHeight="25.0" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="47.0" prefWidth="176.0">
+                     <right>
+                        <TextField fx:id="foundLastName" prefHeight="25.0" prefWidth="131.0" BorderPane.alignment="CENTER" />
                      </right>
                      <top>
                         <Label text="Apellido" BorderPane.alignment="CENTER">
@@ -174,7 +281,7 @@
                         </Label>
                      </top>
                   </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="47.0" prefWidth="168.0">
                      <right>
                         <TextField fx:id="foundIDNumber" prefHeight="25.0" prefWidth="136.0" BorderPane.alignment="CENTER" />
                      </right>
@@ -190,8 +297,8 @@
             </HBox>
             <HBox prefHeight="59.0" prefWidth="200.0">
                <children>
-                  <BorderPane prefHeight="126.0" prefWidth="61.0" />
-                  <BorderPane prefHeight="97.0" prefWidth="150.0">
+                  <BorderPane prefHeight="48.0" prefWidth="9.0" />
+                  <BorderPane prefHeight="48.0" prefWidth="155.0">
                      <top>
                         <Label text="Teléfono" BorderPane.alignment="CENTER">
                            <font>
@@ -199,14 +306,11 @@
                            </font>
                         </Label>
                      </top>
-                     <left>
-                        <TextField fx:id="foundPhone" prefHeight="23.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
-                     </left>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <right>
-                        <TextField fx:id="foundAddres" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                        <TextField fx:id="foundPhone" prefHeight="25.0" prefWidth="140.0" BorderPane.alignment="CENTER" />
                      </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="48.0" prefWidth="176.0">
                      <top>
                         <Label text="DIrección" BorderPane.alignment="CENTER">
                            <font>
@@ -214,8 +318,11 @@
                            </font>
                         </Label>
                      </top>
+                     <right>
+                        <TextField fx:id="foundAddres" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                     </right>
                   </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="48.0" prefWidth="166.0">
                      <right>
                         <TextField fx:id="foundComments" prefWidth="136.0" BorderPane.alignment="CENTER" />
                      </right>
@@ -229,6 +336,114 @@
                   </BorderPane>
                </children>
             </HBox>
+            <HBox prefHeight="75.0" prefWidth="303.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="478.0">
+                     <children>
+                        <BorderPane prefHeight="31.0" prefWidth="462.0">
+                           <center>
+                              <Label text="Buscar empleado:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <HBox prefHeight="40.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="36.0" prefWidth="163.0">
+                                 <right>
+                                    <BorderPane prefHeight="40.0" prefWidth="127.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <Button mnemonicParsing="false" onAction="#searchEmployee" text="Buscar" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Button>
+                                       </center>
+                                    </BorderPane>
+                                 </right>
+                              </BorderPane>
+                              <BorderPane prefHeight="40.0" prefWidth="205.0">
+                                 <left>
+                                    <TextField fx:id="employee_searched" prefHeight="25.0" prefWidth="180.0" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </HBox>
+                        <BorderPane prefHeight="30.0" prefWidth="200.0">
+                           <center>
+                              <Label fx:id="nanoseconds_employee" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="59.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="48.0" prefWidth="26.0" />
+                  <BorderPane prefHeight="48.0" prefWidth="72.0">
+                     <top>
+                        <Label text="Nombre" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <right>
+                        <TextField fx:id="employeeNameFound" prefHeight="25.0" prefWidth="133.0" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="48.0" prefWidth="187.0">
+                     <top>
+                        <Label text="Apellido" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <right>
+                        <TextField fx:id="employeeLastNameFound" prefHeight="25.0" prefWidth="130.0" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="48.0" prefWidth="156.0">
+                     <right>
+                        <TextField fx:id="employeeIdFound" prefHeight="25.0" prefWidth="131.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Label text="Identificación" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+            <VBox prefHeight="229.0" prefWidth="462.0">
+               <children>
+                  <BorderPane prefHeight="43.0" prefWidth="462.0">
+                     <center>
+                        <Label text="Observaciones" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
+                  <HBox prefHeight="120.0" prefWidth="537.0">
+                     <children>
+                        <BorderPane prefHeight="120.0" prefWidth="26.0" />
+                        <TextArea prefHeight="120.0" prefWidth="512.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </center>

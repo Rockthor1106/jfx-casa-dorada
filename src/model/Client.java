@@ -1,5 +1,6 @@
 package model;
 
+
 public class Client extends Person {
 
 	private String phone_number;
@@ -31,14 +32,29 @@ public class Client extends Person {
 		return fullname;
 	}
 	
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
 
-    public int compareNameAndLastName(Client client) {
-        return getFullName().compareTo(client.getFullName());
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public void setAddres(String addres) {
+		this.addres = addres;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public int compareNameAndLastName(Client client) {
+        return getFullName().compareToIgnoreCase(client.getFullName());
     }
 	
 
 	public int compareNameAndLastName(String clien_fullname) {
-        return getFullName().compareTo(clien_fullname);
+        return getFullName().compareToIgnoreCase(clien_fullname);
     }
 	
 }

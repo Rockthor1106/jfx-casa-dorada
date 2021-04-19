@@ -3,7 +3,10 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -25,8 +28,9 @@ public class CasaDorada {
 	//Employee -------------------------------------------------------------------------------------------
 	
 	
-	public void addEmployee(String name, String last_name, String id_number, String username, String password) {
+	public void addEmployee(String name, String last_name, String id_number, String username, String password) throws IOException {
 		employees.add(new Employee(name,last_name,id_number,username,password));
+
 	}
 	
 	//add employee sorted	
@@ -57,16 +61,39 @@ public class CasaDorada {
 			employees.set(i, minEmployee);	
 		}
 	}
+
 	
 	public List<Employee> getEmployees(){
 		return employees; 
 	}
 	
+	public int searchEmployee(String name, String last_name) {
+		
+		int pos = -1;
+		int i = 0;
+		int j = employees.size() - 1;
+		
+		while(i <= j && pos < 0) {
+			int m = (i + j) / 2;
+			if (employees.get(m).compareNameAndLastName(name + " " + last_name) == 0) {
+				pos = m;
+			}
+			else if (employees.get(m).compareNameAndLastName(name + " " + last_name) < 0) {
+				i = m + 1;
+			}
+			else {
+				j = m - 1;
+			}
+		}
+		
+		return pos;	
+	}
+	
 	//Product -------------------------------------------------------------------------------------------
 	
-	public void addProduct(String name_product , String type, String ingredients, String size, double price) {
+	public void addProduct(String name_product , String type, String ingredients, String size, double price) throws IOException {
 		products.add(new Product(name_product, type, ingredients,size,price));
-		
+
 	}
 	
 	public List<Product> getProducts(){
@@ -84,6 +111,36 @@ public class CasaDorada {
 			}
 		}
 	}
+	
+	
+	public void sortProductsByName(List<Product> products) {
+		Comparator<Product> comparator = new ProductNameComparator();
+		Collections.sort(products,comparator);
+	}
+	
+	
+	public int searchProduct(String name) {
+	
+		int pos = -1;
+		int i = 0;
+		int j = products.size() - 1;
+		
+		while(i <= j && pos < 0) {
+			int m = (i + j) / 2;
+			if (products.get(m).compareNameProduct(name) == 0) {
+				pos = m;
+			}
+			else if (products.get(m).compareNameProduct(name) < 0) {
+				i = m + 1;
+			}
+			else {
+				j = m - 1;
+			}
+		}
+		
+		return pos;	
+	}
+	
 	
 	//Order -------------------------------------------------------------------------------------------
 	
@@ -107,7 +164,7 @@ public class CasaDorada {
 	
 	
 	//add clients sorting them
-	public void addClient(String name, String last_name, String id_number, String phone_number, String addres, String comments) {
+	public void addClient(String name, String last_name, String id_number, String phone_number, String addres, String comments) throws IOException {
 		Client client = new Client(name, last_name, id_number, phone_number, addres, comments);
 		if (clients.isEmpty()) {
 			clients.add(client);
@@ -180,6 +237,13 @@ public class CasaDorada {
 		bReader.close();
 	}
 	
-
+	public void updateClient(int pos,String name, String last_name,String id_number, String phone_number, String addres, String comments) {
+		getClients().get(pos).setName(name);
+		getClients().get(pos).setLast_name(last_name);
+		getClients().get(pos).setId_number(id_number);
+		getClients().get(pos).setPhone_number(phone_number);
+		getClients().get(pos).setAddres(addres);
+		getClients().get(pos).setComments(comments);
+	}
 
 }

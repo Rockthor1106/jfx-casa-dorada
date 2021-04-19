@@ -1,7 +1,10 @@
 package model;
 
-public class Employee extends Person {
+import java.io.Serializable;
 
+public class Employee extends Person implements Serializable {
+
+	private static final long serialVersionUID = -3441966887631704526L;
 	private String username;
 	private String password;
 	private String fullname; 
@@ -26,12 +29,12 @@ public class Employee extends Person {
 	}
 
     public int compareNameAndLastName(Employee employee) {
-        return getFullName().compareTo(employee.getFullName());
+        return getFullName().compareToIgnoreCase(employee.getFullName());
     }
 	
 
 	public int compareNameAndLastName(String employee_fullname) {
-        return getFullName().compareTo(employee_fullname);
+        return getFullName().compareToIgnoreCase(employee_fullname);
     }
 
 }

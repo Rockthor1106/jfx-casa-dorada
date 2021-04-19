@@ -6,7 +6,7 @@ import java.util.List;
 public class Order {
 	private String code;
 	private String state;
-	private List<String> products =  new ArrayList<>();
+	private List<String> products = new ArrayList<>() ;
 	private List<Integer> amount_product = new ArrayList<>();
 	private String client;
 	private String deliver;
@@ -22,6 +22,10 @@ public class Order {
 		this.deliver = deliver;
 		this.date = date;
 		this.comments = comments;
+	}
+
+	public Order() {
+
 	}
 
 	public String getCode() {
@@ -55,7 +59,5 @@ public class Order {
 	public String getComments() {
 		return comments;
 	}
-	
-
 
 }

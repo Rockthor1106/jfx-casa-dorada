@@ -177,9 +177,6 @@ public class CasaDoradaGUI {
     private TableColumn<Product, Double> tcPriceProduct;
     
     @FXML
-    private Button deleteButton;
-    
-    @FXML
     private TableView<Order> tvOrdersList;
 
     @FXML
@@ -208,7 +205,6 @@ public class CasaDoradaGUI {
     
     @FXML
     private Label code;
-    
 
     @FXML
     private TableView<Employee> tvEmployeesList;
@@ -222,8 +218,50 @@ public class CasaDoradaGUI {
     @FXML
     private TableColumn<Employee, String> tcEmployeeId;
     
-    Calendar calendar;
+    @FXML
+    private TextField employeeNameFound;
+
+    @FXML
+    private TextField employeeLastNameFound;
+
+    @FXML
+    private TextField employeeIdFound;
     
+    @FXML
+    private TextField employee_searched;
+    
+    @FXML
+    private Label nanoseconds_employee;
+    
+    @FXML
+    private TableView<String> tvOrderProducts;
+
+    @FXML
+    private TableColumn<String, String> tcOrderProduct;
+
+    @FXML
+    private TableColumn<String, Integer> tcOrderAmountProduct;
+
+    @FXML
+    private TableColumn<String, String> tcOrderSizeProduct;
+
+    @FXML
+    private TableColumn<String, Double> tcOrderPriceProduct;
+    
+    @FXML
+    private Label total;
+    
+    @FXML
+    private Button deleteClientButton;
+
+    @FXML
+    private Button updateClientButton;
+
+    @FXML
+    private TextField productToAdd;
+    
+    Calendar calendar;
+     
     private CasaDorada casaDorada;
 
 	public CasaDoradaGUI(CasaDorada casaDorada) {
@@ -232,6 +270,7 @@ public class CasaDoradaGUI {
 	
     @FXML
     public void initialize() {
+    	
     	updateClock();
     	runClock();
     	casaDorada.bubbleSort(casaDorada.getProducts());
@@ -364,6 +403,15 @@ public class CasaDoradaGUI {
 	    alert.setContentText("Producto añadido");
 	    alert.show();
     }
+	
+	@FXML
+    public void employeeNotFound() {
+	    Alert alert = new Alert(AlertType.ERROR);
+	    alert.setTitle("Buscar empleado");
+	    alert.setHeaderText(":C");
+	    alert.setContentText("No hay coincidencias con el nombre y apellido ingresado");
+	    alert.show();
+    }
     
 	// methods to show every screen -------------------------------------------------------------------------------------------
 
@@ -444,7 +492,6 @@ public class CasaDoradaGUI {
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(productsListScreen);
-//    	casaDorada.bubbleSort(casaDorada.getProducts());
     	initializeTableViewOfProducts();
     	
     }
@@ -469,6 +516,7 @@ public class CasaDoradaGUI {
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(addOrdersScreen);
+    	initializeTableViewOfProducts();
     	
     }
     
@@ -523,7 +571,7 @@ public class CasaDoradaGUI {
 	}
 	
     @FXML
-    void addProduct(ActionEvent event) {
+    void addProduct(ActionEvent event) throws IOException {
     	String name_product = registerNameProduct.getText();
     	String ingredients = registerIngredients.getText();
     	String type = registerType.getSelectionModel().getSelectedItem();
@@ -594,6 +642,54 @@ public class CasaDoradaGUI {
 			clientRegisteredSuccessfully();
 		}
 	}
+    
+    @FXML
+    void addOrder(ActionEvent event) throws FileNotFoundException {
+
+    	if (foundLastName.getText().equals(" ") && foundIDNumber.getText().equals(" ") && foundPhone.getText().equals(" ") && foundAddres.getText().equals(" ")
+    			&& employeeNameFound.getText().equals(" ") && employeeIdFound.getText().equals(" ")) {
+    		emptyField("Todos los campos están vacios, por favor llenelos con la información solicitada", AlertType.WARNING);	
+		}
+    	else if (foundName.getText().equals(" ")) {
+			emptyField("Ingrese el nombre del cliente", AlertType.WARNING);
+		}
+    	else if (foundLastName.getText().equals(" ")) {
+    		emptyField("Ingrese el apellido del cliente", AlertType.WARNING);
+		}
+    	else if (foundIDNumber.getText().equals(" ")) {
+    		emptyField("Ingrese la identificación del cliente", AlertType.WARNING);
+		}
+    	else if (foundPhone.getText().equals(" ")) {
+    		emptyField("Ingrese el teléfono del cliente", AlertType.WARNING);
+		}
+    	else if (foundAddres.getText().equals(" ")) {
+    		emptyField("Ingrese la dirección del cliente", AlertType.WARNING);
+		}
+    	else if (employeeNameFound.getText().equals(" ")) {
+    		emptyField("Ingrese el nombre del repartidor", AlertType.WARNING);
+		}
+    	else if (employeeLastNameFound.getText().equals(" ")) {
+    		emptyField("Ingrese el apellido del repartidor", AlertType.WARNING);
+		}
+    	else if (employeeIdFound.getText().equals(" ")) {
+    		emptyField("Ingrese la identificación del repartidor", AlertType.WARNING);
+		}
+    	else {
+			
+		}
+    }	
+    
+    @FXML
+    void addToOrder(ActionEvent event) throws FileNotFoundException {
+    	
+    	casaDorada.getProducts().add(tvProductsList.getSelectionModel().getSelectedItem());
+    	initializeTableViewOfOrderProducts();
+    }
+
+    @FXML
+    void removeOfOrder(ActionEvent event) {
+
+    }
 
     
     //log in and sing out methods -------------------------------------------------------------------------------------------
@@ -680,12 +776,48 @@ public class CasaDoradaGUI {
         	foundAddres.setText(casaDorada.getClients().get(pos).getAddres());
         	foundComments.setText(casaDorada.getClients().get(pos).getComments());
         	nanoseconds.setText("Busqueda realizada en " + (end - start) + " nanosegundos");
-        	deleteButton.setVisible(true);
-    
+        	deleteClientButton.setVisible(true);
+        	updateClientButton.setVisible(true);
+        	
+        	if (updateClientButton.isPressed()) {
+				updateClient(event);
+				
+			}
 		}
     	else {
 			clientNotFound();
-			deleteButton.setVisible(false);
+			deleteClientButton.setVisible(false);
+			updateClientButton.setVisible(false);
+		}
+    	
+    	return pos;
+    }
+    
+
+    @FXML
+    void searchOrderProduct(ActionEvent event) {
+//    	casaDorada.selectionSortx(casaDorada.getProducts());
+    	int pos = casaDorada.searchProduct(productToAdd.getText());
+    	new Order().getProducts().add(casaDorada.getProducts().get(pos).getNameProduct());
+    }
+    
+    
+    @FXML
+    int searchEmployee(ActionEvent event) {
+    	String[]parts = employee_searched.getText().split(" ");
+    	long start = System.nanoTime();
+    	int pos = casaDorada.searchEmployee(parts[0],parts[1]);
+    	long end = System.nanoTime();
+    	
+    	if (pos != -1) {
+        	employeeNameFound.setText(casaDorada.getEmployees().get(pos).getName());
+        	employeeLastNameFound.setText(casaDorada.getEmployees().get(pos).getLastName());
+        	employeeIdFound.setText(casaDorada.getEmployees().get(pos).getIdNumber());
+        	nanoseconds_employee.setText("Busqueda realizada en " + (end - start) + " nanosegundos");
+    
+		}
+    	else {
+			employeeNotFound();;
 		}
     	
     	return pos;
@@ -743,6 +875,17 @@ public class CasaDoradaGUI {
 		tcEmployeeName.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
 		tcEmployeeLastName.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
 		tcEmployeeId.setCellValueFactory(new PropertyValueFactory<Employee,String>("idNumber"));
+		
+	}
+	
+	private void initializeTableViewOfOrderProducts() throws FileNotFoundException {
+    	ObservableList<String> observableList;
+    	observableList = FXCollections.observableArrayList(new Order().getProducts());
+    	
+		tvOrderProducts.setItems(observableList);
+		tcOrderProduct.setCellValueFactory(new PropertyValueFactory<String,String>("products"));
+//		tcEmployeeLastName.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
+//		tcEmployeeId.setCellValueFactory(new PropertyValueFactory<Employee,String>("idNumber"));
 		
 	}
 	
@@ -826,10 +969,26 @@ public class CasaDoradaGUI {
     @FXML
     void deleteClient(ActionEvent event) {
     	int pos_to_delete = searchClient(event);
-    	if (pos_to_delete!=1) {
+    	if (pos_to_delete != -1) {
     		casaDorada.getClients().remove(pos_to_delete);
     		ClientDeleted();
     	}
+    }
+    
+    @FXML
+    void updateClient(ActionEvent event) {
+
+		foundName.setEditable(true);
+		foundLastName.setEditable(true);
+		foundIDNumber.setEditable(true);
+		foundPhone.setEditable(true);
+		foundAddres.setEditable(true);
+		foundComments.setEditable(true);
+		
+//        if (pos_to_update != -1) {
+    		casaDorada.updateClient(0, foundName.getText(),foundLastName.getText(), 
+    	    foundIDNumber.getText(), foundPhone.getText(), foundAddres.getText(), foundComments.getText());
+//    	}
     }
     
 }

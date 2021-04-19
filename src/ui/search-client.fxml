@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -149,25 +150,40 @@
       </GridPane>
    </center>
    <bottom>
-      <BorderPane prefHeight="97.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <center>
-            <Label fx:id="nanoseconds" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </center>
-         <left>
-            <BorderPane prefHeight="97.0" prefWidth="161.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
-                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteClient" text="Eliminar" visible="false" BorderPane.alignment="CENTER">
+                  <Button fx:id="deleteClientButton" mnemonicParsing="false" onAction="#deleteClient" text="Eliminar" visible="false" BorderPane.alignment="CENTER">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                      </font>
                   </Button>
                </center>
             </BorderPane>
-         </left>
-      </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <BorderPane prefHeight="100.0" prefWidth="238.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <Button fx:id="updateClientButton" mnemonicParsing="false" onAction="#updateClient" text="Editar" visible="false" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </center>
+                  </BorderPane>
+               </left>
+            </BorderPane>
+            <BorderPane prefHeight="100.0" prefWidth="526.0">
+               <center>
+                  <Label fx:id="nanoseconds" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
    </bottom>
 </BorderPane>
