@@ -27,6 +27,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#showClientsListScreen" text="Lista de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showProductsListScreen" text="Lista de productos" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showOrdersList" text="Lista de ordenes" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#showEmployeesListScreen" text="Lista de empleados" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
                   </items>
                 </Menu>

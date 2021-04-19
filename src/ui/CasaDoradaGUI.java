@@ -32,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import model.CasaDorada;
 import model.Client;
+import model.Employee;
 import model.Order;
 import model.Product;
 
@@ -208,6 +209,19 @@ public class CasaDoradaGUI {
     @FXML
     private Label code;
     
+
+    @FXML
+    private TableView<Employee> tvEmployeesList;
+
+    @FXML
+    private TableColumn<Employee, String> tcEmployeeName;
+
+    @FXML
+    private TableColumn<Employee, String> tcEmployeeLastName;
+
+    @FXML
+    private TableColumn<Employee, String> tcEmployeeId;
+    
     Calendar calendar;
     
     private CasaDorada casaDorada;
@@ -220,10 +234,12 @@ public class CasaDoradaGUI {
     public void initialize() {
     	updateClock();
     	runClock();
+    	casaDorada.bubbleSort(casaDorada.getProducts());
+    	casaDorada.selectionSort(casaDorada.getEmployees());
     }
 	
 	
-	//Bonus - clock
+	//Bonus - clock -------------------------------------------------------------------------------------------
     public void updateClock() {
     	calendar = Calendar.getInstance(); //this line brings the system time
     	int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
@@ -273,7 +289,7 @@ public class CasaDoradaGUI {
     	
     }
 	
-	// Alerts
+	// Alerts -------------------------------------------------------------------------------------------
 	@FXML
     public void logInAlert(String msg, AlertType alertType, String headerText) {
 	    Alert alert = new Alert(alertType);
@@ -349,7 +365,7 @@ public class CasaDoradaGUI {
 	    alert.show();
     }
     
-	// methods to show every screen
+	// methods to show every screen -------------------------------------------------------------------------------------------
 
     @FXML
     void logInScreen(ActionEvent event) throws IOException {
@@ -428,7 +444,7 @@ public class CasaDoradaGUI {
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(productsListScreen);
-    	casaDorada.bubbleSort(casaDorada.getProducts());
+//    	casaDorada.bubbleSort(casaDorada.getProducts());
     	initializeTableViewOfProducts();
     	
     }
@@ -457,8 +473,21 @@ public class CasaDoradaGUI {
     }
     
     
+    @FXML
+    void showEmployeesListScreen(ActionEvent event) throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employees-list.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent employeesScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(employeesScreen);
+    	initializeTableViewOfEmployees();
+    	
+    }
     
-    //methods to add
+    
+    
+    //methods to add -------------------------------------------------------------------------------------------
     
 	@FXML
 	void createAccount(ActionEvent event) throws IOException {
@@ -567,7 +596,7 @@ public class CasaDoradaGUI {
 	}
 
     
-    //log in and sing out methods
+    //log in and sing out methods -------------------------------------------------------------------------------------------
     
 	@FXML
 	void LogIn(ActionEvent event) throws IOException {
@@ -606,7 +635,8 @@ public class CasaDoradaGUI {
     		menu.getItems().get(9).setVisible(true); //makes the option "lista de clientes" visible
     		menu.getItems().get(10).setVisible(true); //makes the option "lista de productos" visible
     		menu.getItems().get(11).setVisible(true); //makes the option "lista de ordenes" visible
-    		menu.getItems().get(12).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(12).setVisible(true); //makes the option "lista empleados" visible
+    		menu.getItems().get(13).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -623,11 +653,12 @@ public class CasaDoradaGUI {
 		menu.getItems().get(9).setVisible(false); //makes the option "lista de clientes" invisible
 		menu.getItems().get(10).setVisible(false); //makes the option "lista de productos" invisible
 		menu.getItems().get(11).setVisible(false); //makes the option "lista de ordenes" invisible
-		menu.getItems().get(12).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(12).setVisible(false); //makes the option "lista empleados" invisible
+		menu.getItems().get(13).setVisible(false); //makes the option "cerrar sesión" invisible
     }
 
 
-    //methods to search
+    //methods to search -------------------------------------------------------------------------------------------
     
     @FXML
     void searchImage(ActionEvent event) {
@@ -660,7 +691,7 @@ public class CasaDoradaGUI {
     	return pos;
     }
     
-    //initialize tables view
+    //initialize tables view -------------------------------------------------------------------------------------------
     
 	private void initializeTableViewOfClients() throws FileNotFoundException {
     	ObservableList<Client> observableList;
@@ -704,14 +735,25 @@ public class CasaDoradaGUI {
 		tcOrderComments.setCellValueFactory(new PropertyValueFactory<Order,String>("comments"));
 	}
 	
-	//initialize combo box
+	private void initializeTableViewOfEmployees() throws FileNotFoundException {
+    	ObservableList<Employee> observableList;
+    	observableList = FXCollections.observableArrayList(casaDorada.getEmployees());
+    	
+		tvEmployeesList.setItems(observableList);
+		tcEmployeeName.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		tcEmployeeLastName.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
+		tcEmployeeId.setCellValueFactory(new PropertyValueFactory<Employee,String>("idNumber"));
+		
+	}
+	
+	//initialize combo box -------------------------------------------------------------------------------------------
 	public void initializeComboBoxTypeProduct() {
         ObservableList<String> types = FXCollections.observableArrayList("Plato principal","Adicional","Bebida");
         registerType.setValue("Seleccionar");
         registerType.setItems(types);
 	}
     
-    //methods to import
+    //methods to import -------------------------------------------------------------------------------------------
     
     @FXML
     void importDataClients(ActionEvent event) {
@@ -779,7 +821,7 @@ public class CasaDoradaGUI {
 		}
     }
     
-    //other methods
+    //other methods -------------------------------------------------------------------------------------------
     
     @FXML
     void deleteClient(ActionEvent event) {

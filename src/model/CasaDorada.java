@@ -22,20 +22,55 @@ public class CasaDorada {
 		orders = new ArrayList<>();
 	}
 	
-	//Employee
-	//add employee sorted
+	//Employee -------------------------------------------------------------------------------------------
+	
+	
 	public void addEmployee(String name, String last_name, String id_number, String username, String password) {
-		Employee employee = new Employee(name,last_name,id_number,username,password);
-		if (employees.isEmpty()) {
-			employees.add(employee);
-		}
-		else {
-			int i = 0;
-			while(i < employees.size() && employee.compareNameAndLastName(clients.get(i)) > 0) {
-				i++;
+		employees.add(new Employee(name,last_name,id_number,username,password));
+	}
+	
+	//add employee sorted	
+//	public void addEmployee(String name, String last_name, String id_number, String username, String password) {
+//		Employee employee = new Employee(name,last_name,id_number,username,password);
+//		if (employees.isEmpty()) {
+//			employees.add(employee);
+//		}
+//		else {
+//			int i = 0;
+//			while(i < employees.size() && employee.compareNameAndLastName(employees.get(i)) > 0) {
+//				i++;
+//			}
+//			employees.add(i,employee);
+//		}
+//	}
+	
+	public void selectionSort(List<Employee> employees) {
+		for (int i = 0; i < employees.size(); i++) {
+			Employee minEmployee = employees.get(i);
+			for (int j = i+1; j < employees.size(); j++) {
+				if (employees.get(j).compareNameAndLastName(minEmployee) < 0) {
+					Employee tempEmployee = employees.get(j);
+					employees.set(j, minEmployee);
+					minEmployee = tempEmployee;
+				}
 			}
-			employees.add(i,employee);
+			employees.set(i, minEmployee);	
 		}
+	}
+	
+	public List<Employee> getEmployees(){
+		return employees; 
+	}
+	
+	//Product -------------------------------------------------------------------------------------------
+	
+	public void addProduct(String name_product , String type, String ingredients, String size, double price) {
+		products.add(new Product(name_product, type, ingredients,size,price));
+		
+	}
+	
+	public List<Product> getProducts(){
+		return products; 
 	}
 	
 	public void bubbleSort(List<Product> products) {
@@ -50,30 +85,21 @@ public class CasaDorada {
 		}
 	}
 	
-	public List<Employee> getEmployees(){
-		return employees; 
-	}
-	
-	//Product
-	
-	public void addProduct(String name_product , String type, String ingredients, String size, double price) {
-		products.add(new Product(name_product, type, ingredients,size,price));
-		
-	}
+	//Order -------------------------------------------------------------------------------------------
 	
 	public void addOrder(String code,int state,String products,int amount_product, String client, String deliver, String date,String comments) {
 		orders.add(new Order(code, state, products, amount_product, client, deliver, date, comments));
-	}
-	
-	public List<Product> getProducts(){
-		return products; 
 	}
 	
 	public List<Order> getOrders(){
 		return orders;
 	}
 	
-	//Clients
+//	public String generaCode() {
+//	
+//}
+	
+	//Clients -------------------------------------------------------------------------------------------
 	
 	public List<Client> getClients(){
 		return clients; 
@@ -118,6 +144,8 @@ public class CasaDorada {
 		return pos;	
 	}
 	
+	//import -------------------------------------------------------------------------------------------
+	
 	public void importDataClients(String filename) throws IOException{
 
 		BufferedReader bReader = new BufferedReader(new FileReader(filename));
@@ -152,8 +180,6 @@ public class CasaDorada {
 		bReader.close();
 	}
 	
-//	public String generaCode() {
-//		
-//	}
+
 
 }
