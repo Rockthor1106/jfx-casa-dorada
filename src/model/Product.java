@@ -1,6 +1,6 @@
 package model;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	private String name_product;
 	private String type;
 	private String ingredient;
@@ -33,6 +33,12 @@ public class Product {
 
 	public double getPrice() {
 		return price;
+	}
+
+	@Override
+	public int compareTo(Product product) {
+		return 0;
+//		return this.price-product.getPrice();	
 	}
 
 }

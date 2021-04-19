@@ -71,13 +71,9 @@
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <center>
-                  <Label fx:id="foundName" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundName" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <center>
@@ -98,13 +94,9 @@
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <center>
-                  <Label fx:id="foundIDNumber" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundIDNumber" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                <center>
@@ -134,40 +126,24 @@
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <center>
-                  <Label fx:id="foundPhone" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundPhone" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <center>
-                  <Label fx:id="foundAddres" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundAddres" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <center>
-                  <Label fx:id="foundComments" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundComments" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <center>
-                  <Label fx:id="foundLastName" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </center>
+               <left>
+                  <TextField fx:id="foundLastName" editable="false" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
          </children>
       </GridPane>
@@ -175,7 +151,7 @@
    <bottom>
       <BorderPane prefHeight="97.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <center>
-            <Label fx:id="miliseconds" BorderPane.alignment="CENTER">
+            <Label fx:id="nanoseconds" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>

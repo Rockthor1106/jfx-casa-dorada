@@ -19,6 +19,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#logInScreen" text="Iniciar sesión" />
                         <MenuItem mnemonicParsing="false" onAction="#addProductScreen" text="Agregar producto" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#addClientScreen" text="Agregar cliente" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#showRegisterOrderScreen" text="Registrar orden" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#searchClientScreen" text="Buscar cliente" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataClients" text="Importar datos de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataProducts" text="Importar datos de productos" visible="false" />

@@ -137,25 +137,25 @@ public class CasaDoradaGUI {
     private Menu time;
 
     @FXML
-    private Label foundName;
+    private TextField foundName;
 
     @FXML
-    private Label foundIDNumber;
+    private TextField foundIDNumber;
 
     @FXML
-    private Label foundPhone;
+    private TextField foundPhone;
 
     @FXML
-    private Label foundAddres;
+    private TextField foundAddres;
 
     @FXML
-    private Label foundComments;
+    private TextField foundComments;
 
     @FXML
-    private Label foundLastName;
+    private TextField foundLastName;
 
     @FXML
-    private Label miliseconds;
+    private Label nanoseconds;
     
     @FXML
     private TableView<Product> tvProductsList;
@@ -204,6 +204,9 @@ public class CasaDoradaGUI {
 
     @FXML
     private TableColumn<Order, String> tcOrderComments;
+    
+    @FXML
+    private Label code;
     
     Calendar calendar;
     
@@ -354,7 +357,7 @@ public class CasaDoradaGUI {
 		
 		fxmlLoader.setController(this);    	
 		Parent loginScreen = fxmlLoader.load();
-    	
+		
 		mainPane.getChildren().clear();
     	mainPane.setTop(loginScreen);
     }
@@ -425,6 +428,7 @@ public class CasaDoradaGUI {
     	
 		mainPane.getChildren().clear();
     	mainPane.setTop(productsListScreen);
+    	casaDorada.bubbleSort(casaDorada.getProducts());
     	initializeTableViewOfProducts();
     	
     }
@@ -440,6 +444,18 @@ public class CasaDoradaGUI {
     	initializeTableViewOfOrders();
     	
     }
+    
+    @FXML
+    void showRegisterOrderScreen(ActionEvent event) throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-order.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent addOrdersScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(addOrdersScreen);
+    	
+    }
+    
     
     
     //methods to add
@@ -522,7 +538,7 @@ public class CasaDoradaGUI {
     
     @FXML
 	void registerClient(ActionEvent event) throws IOException {
- 		
+ 	
 		String registerNameClient = regNameClient.getText();
 		String registerLastNameClient = regLastNameClient.getText();
 		String registerIdClient = regIdClient.getText();
@@ -582,14 +598,15 @@ public class CasaDoradaGUI {
     		menu.getItems().get(1).setVisible(false); //makes the option "iniciar sesion" invisible
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
-    		menu.getItems().get(4).setVisible(true); //makes the option "buscar cliente" visible
-    		menu.getItems().get(5).setVisible(true); //makes the option "importar datos de clientes" visible
-    		menu.getItems().get(6).setVisible(true); //makes the option "importar datos de productos" visible
-    		menu.getItems().get(7).setVisible(true); //makes the option "importar datos de ordenes" visible
-    		menu.getItems().get(8).setVisible(true); //makes the option "lista de clientes" visible
-    		menu.getItems().get(9).setVisible(true); //makes the option "lista de productos" visible
-    		menu.getItems().get(10).setVisible(true); //makes the option "lista de ordenes" visible
-    		menu.getItems().get(11).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(4).setVisible(true); //makes the option "registrar orden" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "buscar cliente" visible
+    		menu.getItems().get(6).setVisible(true); //makes the option "importar datos de clientes" visible
+    		menu.getItems().get(7).setVisible(true); //makes the option "importar datos de productos" visible
+    		menu.getItems().get(8).setVisible(true); //makes the option "importar datos de ordenes" visible
+    		menu.getItems().get(9).setVisible(true); //makes the option "lista de clientes" visible
+    		menu.getItems().get(10).setVisible(true); //makes the option "lista de productos" visible
+    		menu.getItems().get(11).setVisible(true); //makes the option "lista de ordenes" visible
+    		menu.getItems().get(12).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -598,14 +615,15 @@ public class CasaDoradaGUI {
     	menu.getItems().get(1).setVisible(true); //makes the option "iniciar sesion" visible
     	menu.getItems().get(2).setVisible(false); //makes the option "añadir producto" invisible
    		menu.getItems().get(3).setVisible(false); //makes the option "agregar cliente" invisible
-		menu.getItems().get(4).setVisible(false); //makes the option "buscar cliente" invisible
-		menu.getItems().get(5).setVisible(false); //makes the option "importar datos de clientes" invisible
-		menu.getItems().get(6).setVisible(false); //makes the option "importar datos de productos" invisible
-		menu.getItems().get(7).setVisible(false); //makes the option "importar datos de ordenes" invisible
-		menu.getItems().get(8).setVisible(false); //makes the option "lista de clientes" invisible
-		menu.getItems().get(9).setVisible(false); //makes the option "lista de productos" invisible
-		menu.getItems().get(10).setVisible(false); //makes the option "lista de ordenes" invisible
-		menu.getItems().get(11).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(4).setVisible(false); //makes the option "registrar orden" invisible
+		menu.getItems().get(5).setVisible(false); //makes the option "registrar orden" invisible
+		menu.getItems().get(6).setVisible(false); //makes the option "importar datos de clientes" invisible
+		menu.getItems().get(7).setVisible(false); //makes the option "importar datos de productos" invisible
+		menu.getItems().get(8).setVisible(false); //makes the option "importar datos de ordenes" invisible
+		menu.getItems().get(9).setVisible(false); //makes the option "lista de clientes" invisible
+		menu.getItems().get(10).setVisible(false); //makes the option "lista de productos" invisible
+		menu.getItems().get(11).setVisible(false); //makes the option "lista de ordenes" invisible
+		menu.getItems().get(12).setVisible(false); //makes the option "cerrar sesión" invisible
     }
 
 
@@ -630,7 +648,7 @@ public class CasaDoradaGUI {
         	foundPhone.setText(casaDorada.getClients().get(pos).getPhoneNumber());	
         	foundAddres.setText(casaDorada.getClients().get(pos).getAddres());
         	foundComments.setText(casaDorada.getClients().get(pos).getComments());
-        	miliseconds.setText("Busqueda realizada en " + (end - start) + " nanosegundos");
+        	nanoseconds.setText("Busqueda realizada en " + (end - start) + " nanosegundos");
         	deleteButton.setVisible(true);
     
 		}

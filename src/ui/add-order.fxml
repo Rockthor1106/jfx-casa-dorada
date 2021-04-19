@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane prefHeight="61.0" prefWidth="860.0" BorderPane.alignment="CENTER">
+         <left>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Label text="codigo" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </left>
+         <right>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <Label text="Fecha:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <center>
+                              <Label text="Hora:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <center>
+                              <Label BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <center>
+                              <Label BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </GridPane>
+               </center>
+            </BorderPane>
+         </right>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Label text="SOLICITADO" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </top>
+   <right>
+      <VBox prefHeight="612.0" prefWidth="398.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="463.0">
+                     <children>
+                        <BorderPane prefHeight="31.0" prefWidth="463.0">
+                           <center>
+                              <Label text="Buscar cliente" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <HBox prefHeight="40.0" prefWidth="463.0">
+                           <children>
+                              <BorderPane prefHeight="40.0" prefWidth="210.0">
+                                 <right>
+                                    <BorderPane prefHeight="40.0" prefWidth="127.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <Button mnemonicParsing="false" onAction="#searchClient" text="Buscar" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Button>
+                                       </center>
+                                    </BorderPane>
+                                 </right>
+                              </BorderPane>
+                              <BorderPane prefHeight="40.0" prefWidth="205.0">
+                                 <left>
+                                    <TextField fx:id="name_searched" prefHeight="25.0" prefWidth="180.0" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </HBox>
+                        <BorderPane prefHeight="30.0" prefWidth="463.0">
+                           <center>
+                              <Label fx:id="nanoseconds" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="59.0" prefWidth="462.0">
+               <children>
+                  <BorderPane prefHeight="126.0" prefWidth="61.0" />
+                  <BorderPane prefHeight="97.0" prefWidth="150.0">
+                     <center>
+                        <TextField fx:id="foundName" prefHeight="25.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <top>
+                        <Label text="Nombre" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <TextField fx:id="foundLastName" prefHeight="25.0" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Label text="Apellido" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <TextField fx:id="foundIDNumber" prefHeight="25.0" prefWidth="136.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Label text="Identificación" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="59.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="126.0" prefWidth="61.0" />
+                  <BorderPane prefHeight="97.0" prefWidth="150.0">
+                     <top>
+                        <Label text="Teléfono" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <left>
+                        <TextField fx:id="foundPhone" prefHeight="23.0" prefWidth="113.0" BorderPane.alignment="CENTER" />
+                     </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <TextField fx:id="foundAddres" prefWidth="137.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Label text="DIrección" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <TextField fx:id="foundComments" prefWidth="136.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Label text="Comentarios" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

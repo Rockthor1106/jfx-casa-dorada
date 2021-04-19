@@ -23,9 +23,31 @@ public class CasaDorada {
 	}
 	
 	//Employee
-	
+	//add employee sorted
 	public void addEmployee(String name, String last_name, String id_number, String username, String password) {
-		employees.add(new Employee(name, last_name, id_number, username, password));
+		Employee employee = new Employee(name,last_name,id_number,username,password);
+		if (employees.isEmpty()) {
+			employees.add(employee);
+		}
+		else {
+			int i = 0;
+			while(i < employees.size() && employee.compareNameAndLastName(clients.get(i)) > 0) {
+				i++;
+			}
+			employees.add(i,employee);
+		}
+	}
+	
+	public void bubbleSort(List<Product> products) {
+		for (int i = 1; i < products.size(); i++) {
+			for (int j = 0; j < products.size()-1; j++) {
+				if (products.get(j).getPrice() > products.get(j+1).getPrice()) {
+					Product temProduct = products.get(j);
+					products.set(j, products.get(j+1));
+					products.set(j+1, temProduct);
+				}
+			}
+		}
 	}
 	
 	public List<Employee> getEmployees(){
@@ -36,6 +58,7 @@ public class CasaDorada {
 	
 	public void addProduct(String name_product , String type, String ingredients, String size, double price) {
 		products.add(new Product(name_product, type, ingredients,size,price));
+		
 	}
 	
 	public void addOrder(String code,int state,String products,int amount_product, String client, String deliver, String date,String comments) {
@@ -128,5 +151,9 @@ public class CasaDorada {
 		}
 		bReader.close();
 	}
+	
+//	public String generaCode() {
+//		
+//	}
 
 }
