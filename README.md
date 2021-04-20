@@ -21,6 +21,6 @@ y comparator(ordenar los productos por nombre para una busqueda que requeria, pe
 12. Ahora es posible importar información de archivo .csv de: clientes, productos, ordenes e ingredientes
 
 13. Añadido, dos clases enum, la primera para manejar el estado de una orden (se puede ver que funciona en la tabla de ordenes 
-la pantalla de ordenes no está completamente funcional)
+la pantalla de ordenes no está completamente funcional). La segunda para manejar la disponibilidad de un ingrediente
 
 14. Ahora es posible ver la hora en todo momento (bonus reloj)
