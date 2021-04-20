@@ -293,6 +293,7 @@ public class CasaDoradaGUI {
     	runClock();
     	casaDorada.bubbleSort(casaDorada.getProducts());
     	casaDorada.selectionSort(casaDorada.getEmployees());
+    	casaDorada.sortIngredientsByName(casaDorada.getIngredients());
     }
 	
 	

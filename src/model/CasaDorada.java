@@ -212,6 +212,10 @@ public class CasaDorada {
 		return ingredients;
 	}
 	
+	public void sortIngredientsByName(List<Ingredients> ingredients) {
+		Collections.sort(ingredients);
+	}
+	
 	//import -------------------------------------------------------------------------------------------
 	
 	public void importDataClients(String filename) throws IOException{
