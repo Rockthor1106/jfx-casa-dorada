@@ -4,10 +4,10 @@ public class Ingredients {
 	private String name_ingredient;
 	private String availability;
 	
-	public Ingredients(String name_ingredient, String availability) {
+	public Ingredients(String name_ingredient, int availability_num) {
 
-		this.setName_ingredient(name_ingredient);
-		this.setAvailability(availability);
+		this.name_ingredient = name_ingredient;
+		this.availability = IngredientAvailability.values()[availability_num].name();
 	}
 
 	public String getAvailability() {

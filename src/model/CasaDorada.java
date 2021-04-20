@@ -3,7 +3,6 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,12 +16,14 @@ public class CasaDorada {
 	private List<Product> products;
 	private List<Client> clients;
 	private List<Order> orders;
+	private List<Ingredients> ingredients;
 	
 	public CasaDorada() {
 		employees = new ArrayList<>();
 		products = new ArrayList<>();
 		clients = new ArrayList<>();
 		orders = new ArrayList<>();
+		ingredients = new ArrayList<>();
 	}
 	
 	//Employee -------------------------------------------------------------------------------------------
@@ -199,6 +200,16 @@ public class CasaDorada {
 		}
 		
 		return pos;	
+	}
+	
+	//ingredients --------------------------------------------------------------------------------------
+	
+	public void addIngredients(String name, int availability) {
+		ingredients.add(new Ingredients(name, availability));
+	}
+	
+	public List<Ingredients> getIngredients() {
+		return ingredients;
 	}
 	
 	//import -------------------------------------------------------------------------------------------
