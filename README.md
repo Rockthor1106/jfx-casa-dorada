@@ -4,7 +4,7 @@
 
 3. Se atualizó el diagrama de clases completamente
 
-5. El diagrama de clases se encuentra fuera del docuemnto de requerimientos, esto para mejorar la calidad de la imagen
+5. El diagrama de clases se encuentra fuera del documento de requerimientos, esto para mejorar la calidad de la imagen
 
 7. El metodo main ahora esta subrayado :D
 
