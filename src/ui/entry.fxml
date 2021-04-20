@@ -25,10 +25,12 @@
                         <MenuItem mnemonicParsing="false" onAction="#importDataClients" text="Importar datos de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataProducts" text="Importar datos de productos" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#importDataOrders" text="Importar datos de ordenes" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#importDataIngredients" text="Importar datos de ingredientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showClientsListScreen" text="Lista de clientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showProductsListScreen" text="Lista de productos" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showOrdersList" text="Lista de ordenes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#showEmployeesListScreen" text="Lista de empleados" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#showIngredientsListScreen" text="Lista de ingredientes" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#singOut" text="Cerrar sesión" visible="false" />
                   </items>
                 </Menu>

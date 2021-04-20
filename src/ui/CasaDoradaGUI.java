@@ -34,6 +34,7 @@ import model.CasaDorada;
 import model.Client;
 import model.Employee;
 import model.IngredientAvailability;
+import model.Ingredients;
 import model.Order;
 import model.Product;
 
@@ -267,6 +268,15 @@ public class CasaDoradaGUI {
 
     @FXML
     private ComboBox<String> availability;
+    
+    @FXML
+    private TableView<Ingredients> tvIngredients;
+
+    @FXML
+    private TableColumn<Ingredients, String> tcIngredientsName;
+
+    @FXML
+    private TableColumn<Ingredients, String> tcAvailability;
     
     Calendar calendar;
      
@@ -562,6 +572,18 @@ public class CasaDoradaGUI {
     }
     
     
+    @FXML
+    void showIngredientsListScreen(ActionEvent event) throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ingredients-list.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent ingredientsListScreen = fxmlLoader.load();
+    	
+		mainPane.getChildren().clear();
+    	mainPane.setTop(ingredientsListScreen);
+    	initializeTableViewOfIngredients();
+    	
+    }
+    
     //methods to add -------------------------------------------------------------------------------------------
     
 	@FXML
@@ -764,16 +786,18 @@ public class CasaDoradaGUI {
     		menu.getItems().get(2).setVisible(true); //makes the option "añadir producto" visible
     		menu.getItems().get(3).setVisible(true); //makes the option "agregar cliente" visible
     		menu.getItems().get(4).setVisible(true); //makes the option "registrar orden" visible
-    		menu.getItems().get(5).setVisible(true); //makes the option "agregar cliente" visible
-    		menu.getItems().get(6).setVisible(true); //makes the option "buscar clinente" visible
+    		menu.getItems().get(5).setVisible(true); //makes the option "agregar ingrediente" visible
+    		menu.getItems().get(6).setVisible(true); //makes the option "buscar cliente" visible
     		menu.getItems().get(7).setVisible(true); //makes the option "importar datos de clientes" visible
     		menu.getItems().get(8).setVisible(true); //makes the option "importar datos de productos" visible
     		menu.getItems().get(9).setVisible(true); //makes the option "importar datos de ordenes" visible
-    		menu.getItems().get(10).setVisible(true); //makes the option "lista de clientes" visible
-    		menu.getItems().get(11).setVisible(true); //makes the option "lista de productos" visible
-    		menu.getItems().get(12).setVisible(true); //makes the option "lista ordenes" visible
-    		menu.getItems().get(13).setVisible(true); //makes the option "lista de empleado" visible
-    		menu.getItems().get(14).setVisible(true); //makes the option "cerrar sesión" visible
+    		menu.getItems().get(10).setVisible(true); //makes the option "importar datos de ingredientes" visible
+    		menu.getItems().get(11).setVisible(true); //makes the option "lista de clientes" visible
+    		menu.getItems().get(12).setVisible(true); //makes the option "lista de productos" visible
+    		menu.getItems().get(13).setVisible(true); //makes the option "lista de ordenes" visible
+    		menu.getItems().get(14).setVisible(true); //makes the option "lista de empleados" visible
+    		menu.getItems().get(15).setVisible(true); //makes the option "lista de ingredientes" visible
+    		menu.getItems().get(16).setVisible(true); //makes the option "cerrar sesión" visible
 		}
     }
     
@@ -788,11 +812,13 @@ public class CasaDoradaGUI {
 		menu.getItems().get(7).setVisible(false); //makes the option "importar datos de clientes" invisible
 		menu.getItems().get(8).setVisible(false); //makes the option "importar datos de productos" invisible
 		menu.getItems().get(9).setVisible(false); //makes the option "importar datos de ordenes" invisible
-		menu.getItems().get(10).setVisible(false); //makes the option "lista de clientes" invisible
-		menu.getItems().get(11).setVisible(false); //makes the option "lista de producto" invisible
-		menu.getItems().get(12).setVisible(false); //makes the option "lista de ordenes" invisible
-		menu.getItems().get(13).setVisible(false); //makes the option "lista de empleados" invisible
-		menu.getItems().get(14).setVisible(false); //makes the option "cerrar sesión" invisible
+		menu.getItems().get(10).setVisible(false); //makes the option "importar datos de ingredientes" invisible
+		menu.getItems().get(11).setVisible(false); //makes the option "lista de clientes" invisible
+		menu.getItems().get(12).setVisible(false); //makes the option "lista de productos" invisible
+		menu.getItems().get(13).setVisible(false); //makes the option "lista de ordenes" invisible
+		menu.getItems().get(14).setVisible(false); //makes the option "lista de empleados" invisible
+		menu.getItems().get(15).setVisible(false); //makes the option "lista de ingredientes" invisible
+		menu.getItems().get(16).setVisible(false); //makes the option "cerrar sesión" invisible
     }
 
 
@@ -930,6 +956,16 @@ public class CasaDoradaGUI {
 		
 	}
 	
+	private void initializeTableViewOfIngredients() throws FileNotFoundException {
+    	ObservableList<Ingredients> observableList;
+    	observableList = FXCollections.observableArrayList(casaDorada.getIngredients());
+    	
+		tvIngredients.setItems(observableList);
+		tcIngredientsName.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("nameIngredient"));
+		tcAvailability.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("availability"));
+		
+	}
+	
 	//initialize combo box -------------------------------------------------------------------------------------------
 	public void initializeComboBoxTypeProduct() {
         ObservableList<String> types = FXCollections.observableArrayList("Plato principal","Adicional","Bebida");
@@ -1000,6 +1036,28 @@ public class CasaDoradaGUI {
    	     alert.setTitle("Importar datos de ordenes");
    	     try {
    	    	 casaDorada.importDataOrders(file.getAbsolutePath());
+   	    	 alert.setContentText("Datos importados exitosamente");
+   	    	 alert.showAndWait();
+   	     }catch(IOException e) {
+   	    	 alert.setContentText("Los datos no fueron importado. Ha ocurrido un error");
+   	    	 alert.showAndWait();
+   	    	 e.printStackTrace();
+
+   	     }
+		}
+    }
+    
+    @FXML
+    void importDataIngredients(ActionEvent event) {
+    	
+    	FileChooser fChooser = new FileChooser();
+    	fChooser.setTitle("Importar datos de ingredientes");
+    	File file = fChooser.showOpenDialog(mainPane.getScene().getWindow());
+    	if (file != null) {
+   	     Alert alert = new Alert(AlertType.INFORMATION);
+   	     alert.setTitle("Importar datos de ingredientes");
+   	     try {
+   	    	 casaDorada.importDataIngredients(file.getAbsolutePath());
    	    	 alert.setContentText("Datos importados exitosamente");
    	    	 alert.showAndWait();
    	     }catch(IOException e) {

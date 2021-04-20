@@ -18,7 +18,7 @@ public class Ingredients {
 		this.availability = availability;
 	}
 
-	public String getName_ingredient() {
+	public String getNameIngredient() {
 		return name_ingredient;
 	}
 

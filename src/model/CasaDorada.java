@@ -248,6 +248,20 @@ public class CasaDorada {
 		bReader.close();
 	}
 	
+	public void importDataIngredients(String filename) throws IOException{
+		BufferedReader bReader = new BufferedReader(new FileReader(filename));
+		String line = bReader.readLine();
+		while(line != null) {
+			String[] parts = line.split(",");
+			addIngredients(parts[0],Integer.parseInt(parts[1]));
+			line = bReader.readLine();
+		}
+		bReader.close();
+	}
+	
+	
+	
+	//it is not functional yet
 	public void updateClient(int pos,String name, String last_name,String id_number, String phone_number, String addres, String comments) {
 		getClients().get(pos).setName(name);
 		getClients().get(pos).setLast_name(last_name);
@@ -256,5 +270,7 @@ public class CasaDorada {
 		getClients().get(pos).setAddres(addres);
 		getClients().get(pos).setComments(comments);
 	}
+	
+	
 
 }
