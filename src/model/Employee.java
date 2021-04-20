@@ -1,10 +1,8 @@
 package model;
 
-import java.io.Serializable;
 
-public class Employee extends Person implements Serializable {
+public class Employee extends Person {
 
-	private static final long serialVersionUID = -3441966887631704526L;
 	private String username;
 	private String password;
 	private String fullname; 
