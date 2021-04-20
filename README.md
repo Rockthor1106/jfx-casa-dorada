@@ -9,7 +9,7 @@
 7. El metodo main ahora esta subrayado :D
 
 9. Ahora es posible registrar un ingrediente y eliminar un usuario 
-(el botón de editar aparecerá al hacer la busque en la opción disponible para busqueda fuera de la orden, pero no se encuentra funcional) 
+(el botón de editar aparecerá al hacer la busqueda en la opción disponible para busqueda de cliente fuera de la orden, pero no se encuentra funcional aún) 
 
 7. Ahora es posible visualizar tablas con información de: clientes, empleados(usuarios), ingredientes, ordenes, productos
 
